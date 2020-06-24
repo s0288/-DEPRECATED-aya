@@ -1,0 +1,9 @@
+config.py
+Read_me.rtf
+.ipynb_checkpoints
+*.py[cod]
+*.log
+.vscode
+*.sql
+*.tar.gz
+*.egg-info

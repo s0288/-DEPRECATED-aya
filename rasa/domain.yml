@@ -1,0 +1,115 @@
+actions:
+- action_end_fast
+- action_fasting_since
+- action_hello_world
+- action_start_fast
+- action_set_reminder_16h
+- action_forget_reminder_16h
+
+entities:
+- is_fasting
+- start_fast
+- hours_fasted
+- mins_fasted
+
+slots:
+  hours_fasted:
+    type: unfeaturized
+  mins_fasted:
+    type: unfeaturized
+  is_fasting:
+    initial_value: 0
+    type: categorical
+    values:
+    - '0'
+    - '1'
+  start_fast:
+    type: unfeaturized
+    initial_value: 'None' # rasa converts None to 'None' --> to prevent future errors, set 'None' right away
+
+
+intents:
+- fast_end
+- affirm
+- fast_start
+- greet
+- deny
+- start
+- goodbye
+- mood_great
+- mood_unhappy
+- no_problem
+- 16h_fast_reminder: {triggers: utter_reminder_16h}
+
+
+responses:
+  utter_ask_end_fast:
+  - buttons:
+    - payload: ja
+      title: ja
+    - payload: nein
+      title: nein
+    text: Du fastest seit {hours_fasted} und {mins_fasted}. Möchtest du das Fasten
+      jetzt beenden?
+  
+  utter_ask_fast:
+  - buttons:
+    - payload: ja
+      title: ja
+    - payload: nein
+      title: nein
+    text: Möchtest du fasten?
+
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Das muntert dich vielleicht auf:'
+  
+  utter_did_that_help:
+  - text: Hat dir das geholfen?
+  
+  utter_end_fast:
+  - text: Ich habe deine Fastenuhr gestoppt. Du hast {hours_fasted} und {mins_fasted}
+      gefastet. Glückwunsch :)
+  
+  utter_goodbye:
+  - text: Ciao
+  - text: Bis bald
+  - text: Mach's gut
+  
+  utter_greet:
+  - text: Hey! Wie geht es dir? :)
+  - text: Hallo. Wie fühlst du dich?
+  
+  utter_happy:
+  - text: Super, weiter so!
+  
+  utter_info_fast:
+  - text: Du fastest seit {hours_fasted} und {mins_fasted}.
+  
+  utter_no_problem:
+  - text: kein Problem
+  - text: gern geschehen
+  - text: gerne
+  
+  utter_ok:
+  - text: ok
+  
+  utter_start:
+  - buttons:
+    - payload: fasten
+      title: fasten
+    - payload: mehr Infos?
+      title: mehr Infos
+    text: Hey! Ich bin dein digitaler Begleiter und helfe dir zu fasten. Klicke auf
+      'fasten', um sofort zu starten, oder 'mehr Infos'.
+  
+  utter_start_fast:
+  - text: Ich habe deine Fastenuhr gestartet. Frohes Fasten!
+  
+  utter_reminder_16h:
+  - text: Du fastest seit 16 Stunden! :)
+
+
+session_config:
+  carry_over_slots_to_new_session: true
+  session_expiration_time: 60
