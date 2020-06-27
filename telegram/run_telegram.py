@@ -20,8 +20,6 @@ def main(chat_id=None):
 
     while True:
         try:
-            logging.info('Hi!')
-            
             ##### listen for new messages
             updates = Telegram_Bot.get_updates(last_update_id)
             ## main job
@@ -31,7 +29,8 @@ def main(chat_id=None):
                 # extract incoming message
                 chat_id, message = Telegram_Bot.extract_main(updates)
                 # get outgoing message
-                src.call_webhook(chat_id, message)
+                webhook_response = src.call_webhook(chat_id, message)
+                logging.info(f"webhook_response: {webhook_response}")
         except Exception as e:
             logging.exception(e)
 
@@ -39,6 +38,6 @@ def main(chat_id=None):
         sys.stdout.write('.'); sys.stdout.flush()
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO) # filename='aya.log'
+    logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO) # filename='aya.log'
     Telegram_Bot = telegram_bot.Telegram_Bot()
     main()
