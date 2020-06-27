@@ -5,7 +5,8 @@
             "name": "telegram",
             "image": "s0288/telegram",
             "hostname": "telegram",
-            "essential": true
+            "essential": true,
+            "memory": 128
         },        {
             "name": "flask",
             "image": "s0288/flask",
@@ -16,7 +17,8 @@
                     "hostPort": 5000,
                     "containerPort": 5000
                 }
-            ]
+            ],
+            "memory": 128
         },
         {
             "name": "rasa",
@@ -29,7 +31,8 @@
                     "containerPort": 5005
                 }
             ],
-            "links": ["flask", "actions"]
+            "links": ["flask", "actions"],
+            "memory": 128
         },
         {
             "name": "actions",
@@ -41,7 +44,8 @@
                     "hostPort": 5055,
                     "containerPort": 5055
                 }
-            ]
+            ],
+            "memory": 128
         }
     ]
 }
