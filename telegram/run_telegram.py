@@ -29,6 +29,7 @@ def main(chat_id=None):
                 # extract incoming message
                 chat_id, message = Telegram_Bot.extract_main(updates)
                 # get outgoing message
+                logging.info(f"user message: {message}")
                 webhook_response = src.call_webhook(chat_id, message)
                 logging.info(f"webhook_response: {webhook_response}")
         except Exception as e:
