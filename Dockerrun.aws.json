@@ -16,8 +16,7 @@
                     "hostPort": 5000,
                     "containerPort": 5000
                 }
-            ],
-            "links": ["rasa"]
+            ]
         },
         {
             "name": "rasa",
@@ -42,8 +41,7 @@
                     "hostPort": 5055,
                     "containerPort": 5055
                 }
-            ],
-            "links": ["rasa"]
+            ]
         }
     ]
 }
