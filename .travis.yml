@@ -24,6 +24,7 @@ after_success:
     - docker push s0288/actions
 
 deploy:
+    edge: true
     provider: elasticbeanstalk
     region: eu-central-1
     app: aya
