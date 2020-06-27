@@ -10,8 +10,7 @@ services:
 # script:
 #     - docker run s0288/telegram-test -- --coverage
 
-# after_success:
-before_install:
+after_success:
     - docker build -t s0288/telegram .
     - docker build -t s2088/flask .
     - docker build -t s0288/rasa .
