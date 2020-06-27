@@ -4,10 +4,25 @@ services:
     - docker
 
 # before_install:
-#     - docker build -t agansmann/docker-react -f Dockerfile.dev .
+#     - docker build -t s0288/telegram-test -f ./tests/Dockerfile.telegram .
+#     - ...
 
 # script:
-#     - docker run -e CI=true agansmann/docker-react npm run test 
+#     - docker run s0288/telegram-test -- --coverage
+
+# after_success:
+before_install:
+    - docker build -t s0288/telegram .
+    - docker build -t s2088/flask .
+    - docker build -t s0288/rasa .
+    - docker build -t s0288/actions .
+    # Log in to Docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    # push to Docker Hub
+    - docker push s0288/telegram
+    - docker push s0288/flask
+    - docker push s0288/rasa
+    - docker push s0288/actions
 
 # deploy:
 #     provider: elasticbeanstalk
