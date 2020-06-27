@@ -18,6 +18,7 @@
                     "containerPort": 5000
                 }
             ],
+            "links": ["rasa"],
             "memory": 128
         },
         {
@@ -31,7 +32,7 @@
                     "containerPort": 5005
                 }
             ],
-            "links": ["flask", "actions"],
+            "links": ["actions"],
             "memory": 128
         },
         {
