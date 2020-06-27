@@ -8,46 +8,5 @@
             "essential": true,
             "memory": 128
         }
-        // ,        {
-        //     "name": "flask",
-        //     "image": "s0288/flask",
-        //     "hostname": "flask",
-        //     "essential": true,
-        //     "portMappings": [
-        //         {
-        //             "hostPort": 5000,
-        //             "containerPort": 5000
-        //         }
-        //     ],
-        //     "links": ["rasa"],
-        //     "memory": 128
-        // },
-        // {
-        //     "name": "rasa",
-        //     "image": "s0288/rasa",
-        //     "hostname": "rasa",
-        //     "essential": false,
-        //     "portMappings": [
-        //         {
-        //             "hostPort": 5005,
-        //             "containerPort": 5005
-        //         }
-        //     ],
-        //     "links": ["actions"],
-        //     "memory": 128
-        // },
-        // {
-        //     "name": "actions",
-        //     "image": "s0288/actions",
-        //     "hostname": "actions",
-        //     "essential": true,
-        //     "portMappings": [
-        //         {
-        //             "hostPort": 5055,
-        //             "containerPort": 5055
-        //         }
-        //     ],
-        //     "memory": 128
-        // }
     ]
 }
