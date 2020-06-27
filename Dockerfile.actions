@@ -2,9 +2,17 @@ FROM python:3.7-slim
 
 WORKDIR '/app'
 
+# install dependencies
 COPY requirements_rasa.txt .
 RUN pip install -r requirements_rasa.txt
+# install module
 COPY setup.py .
 RUN python setup.py develop
 
-CMD python setup.py develop
+# mount relevant directories
+COPY ./rasa ./rasa
+COPY ./src ./src
+
+EXPOSE 5055
+
+CMD cd /app/rasa/ && rasa run actions

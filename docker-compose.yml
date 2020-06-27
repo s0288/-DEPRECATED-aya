@@ -2,48 +2,31 @@ version: '3'
 
 services:
     telegram:
-        build: '.'
+        image: s0288/telegram
         networks:
             - aya
-        volumes:
-            - ./src:/app/src
-            - ./telegram:/app/telegram
-        command: bash -c "cd /app/telegram/ && python run_telegram.py"
     flask:
-        build: 
-            context: ./
-            dockerfile: 'Dockerfile.flask'
+        image: s0288/flask
         networks:
             - aya
         ports:
             - "5000:5000"
-        volumes:
-            - ./src:/app/src
-            - ./flask:/app/flask
-            - ./telegram:/app/telegram
-        command: bash -c "cd /app/flask/ && flask run --host 0.0.0.0"
     rasa:
-        image: rasa/rasa:1.10.3-full
+        image: s0288/rasa
         networks:
             - aya
         ports:
             - "5005:5005"
         volumes:
             - ./rasa:/app
-        command:
-            - run
     actions:
-        build: 
-            context: ./
-            dockerfile: 'Dockerfile.actions'
+        image: s0288/actions
         networks:
             - aya
         ports:
             - "5055:5055"
         volumes:
             - ./rasa:/app/rasa
-            - ./src:/app/src
-        command: bash -c "cd /app/rasa/ && rasa run actions"
 
 networks:
     aya:

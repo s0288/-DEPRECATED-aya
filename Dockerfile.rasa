@@ -1,0 +1,10 @@
+FROM rasa/rasa:1.10.3-full
+
+WORKDIR '/app'
+
+# mount relevant directories
+COPY ./rasa .
+
+EXPOSE 5005
+
+CMD ["run"]
