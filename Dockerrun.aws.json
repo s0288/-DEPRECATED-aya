@@ -1,5 +1,13 @@
 {
     "AWSEBDockerrunVersion": 2,
+    "volumes": [
+        {
+          "name": "rasa-app",
+          "host": {
+            "sourcePath": "/var/app/rasa"
+          }
+        }  
+      ],
     "containerDefinitions": [
         {
             "name": "telegram",
@@ -8,7 +16,8 @@
             "essential": true,
             "links": ["rasa"],
             "memory": 128
-        },{
+        },
+        {
             "name": "flask",
             "image": "s0288/flask",
             "hostname": "flask",
@@ -32,6 +41,13 @@
                     "containerPort": 5005
                 }
             ],
+            "mountPoints": [
+                {
+                  "sourceVolume": "rasa-app",
+                  "containerPath": "/var/app",
+                  "readOnly": true
+                }
+              ],
             "links": ["flask", "actions"],
             "memory": 128
         },
