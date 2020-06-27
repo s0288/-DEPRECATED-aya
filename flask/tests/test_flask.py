@@ -1,5 +1,6 @@
 import unittest
 
+import os
 import src_telegram.core_bot
 
 Core_Bot = src_telegram.core_bot.Core_Bot()
@@ -9,7 +10,7 @@ Core_Bot = src_telegram.core_bot.Core_Bot()
 # class TestFlaskAvailability(unittest.TestCase):
 #     ## test that sending of messages is possible
 #     def test_communicating_with_flask(self):
-#         sending = src_main.call_webhook(src_main.config.TEST_USER, 'hi')
+#         sending = src_main.call_webhook(os.environ["TEST_USER"], 'hi')
 #         self.assertEqual(sending, 'success')
 
 

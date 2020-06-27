@@ -9,15 +9,14 @@
 ## purpose: 
 # - add actions to action db
 
-
+import os
 from sqlalchemy import *
-import src.config
 import logging
 
 #### event class
 class Actions_DB:
     def __init__(self):
-        engine = create_engine(src.config.POSTGRES)
+        engine = create_engine(os.environ["POSTGRES"])
         metadata = MetaData(engine)
         self.conn = engine.connect()
 

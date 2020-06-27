@@ -5,18 +5,17 @@
 ## purpose: 
 # - data manipulation functions, specifically for telegram
 
+import os
 from sqlalchemy import *
 import logging
 
 import src.db_setup
 import src.db_global
 
-import src.config
-
 
 class Telegram_DB:
     def __init__(self):
-        engine = create_engine(src.config.POSTGRES)
+        engine = create_engine(os.environ["POSTGRES"])
         metadata = MetaData(engine)
         self.conn = engine.connect()
         ## check if databases have been created already

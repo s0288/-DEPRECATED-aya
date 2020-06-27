@@ -5,6 +5,7 @@
 ## purpose: 
 # - extract functions, save functions and send functions
 
+import os
 import requests
 import json
 import datetime
@@ -15,11 +16,9 @@ import logging
 import src.db_telegram_bot
 import src.call_webhook
 
-import src.config
-
 Telegram_DB = src.db_telegram_bot.Telegram_DB()
 
-URL = f"https://api.telegram.org/bot{src.config.TELEGRAM_TOKEN}/"
+URL = f"https://api.telegram.org/bot{os.environ['TELEGRAM_TOKEN']}/"
 
 class Telegram_Bot:
 # ------ save message to db

@@ -10,14 +10,12 @@
 # - set up relevant databases
 # - add user globally
 
-
+import os
 from sqlalchemy import *
 
 import random
 import string
 from sqlalchemy.exc import IntegrityError
-
-import src.config
 
 
 ## add global user (cross-platform) - important: unique slug
@@ -52,7 +50,7 @@ if __name__ == '__main__':
     from sqlalchemy import *
     import datetime
     
-    engine = create_engine(src.config.POSTGRES)
+    engine = create_engine(os.environ["POSTGRES"])
     metadata = MetaData(engine)
     conn = engine.connect()
     
