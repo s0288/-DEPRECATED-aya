@@ -4,10 +4,17 @@
 #
 #    pip-compile requirements_flask.in
 #
+certifi==2020.6.20        # via requests
+chardet==3.0.4            # via requests
 click==7.1.2              # via flask
 flask==1.1.2              # via -r requirements_flask.in
+idna==2.9                 # via requests
 itsdangerous==1.1.0       # via flask
 jinja2==2.11.2            # via flask
 markupsafe==1.1.1         # via jinja2
+psycopg2-binary==2.8.5    # via -r requirements_flask.in
 python-dotenv==0.13.0     # via -r requirements_flask.in
+requests==2.23.0          # via -r requirements_flask.in
+sqlalchemy==1.3.17        # via -r requirements_flask.in
+urllib3==1.25.9           # via requests
 werkzeug==1.0.1           # via flask
