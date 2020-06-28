@@ -20,7 +20,7 @@
             "image": "s0288/telegram",
             "hostname": "telegram",
             "essential": true,
-            "memory": 128
+            "memory": 900
         },
         {
             "name": "flask",
@@ -33,7 +33,7 @@
                     "containerPort": 5000
                 }
             ],
-            "memory": 128
+            "memory": 900
         },
         {
             "name": "rasa",
@@ -62,7 +62,7 @@
             "image": "rasa/rasa-sdk:1.10.1",
             "hostname": "actions",
             "essential": false,
-            "memory": 128,
+            "memory": 900,
             "memoryReservation": 90,
             "command": ["start", "--actions", "actions"],
             "mountPoints": [
