@@ -1,14 +1,13 @@
 {
     "AWSEBDockerrunVersion": 2,
-    "volumes": [
-        {
-          "host": {
-                "sourcePath": "/var/app/current/src"
-            },
-            "name": "src"
-        }
-      ],
     "containerDefinitions": [
+        {
+            "name": "telegram",
+            "image": "s0288/telegram",
+            "hostname": "telegram",
+            "essential": true,
+            "memory": 900
+        },
         {
             "name": "flask",
             "image": "s0288/flask",
