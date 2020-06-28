@@ -26,7 +26,8 @@ services:
             - "5005:5005"
         volumes:
             - ./rasa:/app
-        command: run
+        command: 
+            - run
         depends_on:
             - actions
     actions:

@@ -5,8 +5,8 @@ Read_me.rtf
 *.log
 .vscode
 *.sql
-*.tar.gz
 *.egg-info
 *.sh
 .env
 *.pem
+
