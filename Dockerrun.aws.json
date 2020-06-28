@@ -31,9 +31,9 @@
             "memory": 128
         },
         {
-            "name": "rasa",
+            "name": "rasa-app",
             "image": "s0288/rasa:latest",
-            "hostname": "rasa-app",
+            "hostname": "rasa",
             "essential": false,
             "portMappings": [
                 {
