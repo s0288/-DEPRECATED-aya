@@ -2,7 +2,7 @@
     "AWSEBDockerrunVersion": 2,
     "volumes": [
         {
-          "name": "rasa-app",
+          "name": "rasa-volume",
           "host": {
             "sourcePath": "./app/rasa"
           }
@@ -43,7 +43,7 @@
             ],
             "mountPoints": [
                 {
-                  "sourceVolume": "rasa-app",
+                  "sourceVolume": "rasa-volume",
                   "containerPath": "./app"
                 }
               ],
