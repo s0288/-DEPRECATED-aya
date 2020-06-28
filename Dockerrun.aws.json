@@ -21,62 +21,6 @@
             "hostname": "telegram",
             "essential": true,
             "memory": 900
-        },
-        {
-            "name": "flask",
-            "image": "s0288/flask",
-            "hostname": "flask",
-            "essential": false,
-            "portMappings": [
-                {
-                    "hostPort": 5000,
-                    "containerPort": 5000
-                }
-            ],
-            "memory": 900
-        },
-        {
-            "name": "rasa",
-            "image": "rasa/rasa:1.10.3-full",
-            "hostname": "rasa",
-            "essential": false,
-            "memory": 900,
-            "memoryReservation": 512,
-            "command": ["run"],
-            "mountPoints": [
-                {
-                  "containerPath": "/app",
-                  "sourceVolume": "Rasa"
-                }
-              ],
-            "portMappings": [
-                {
-                    "containerPort": 5005,
-                    "hostPort": 5005
-                }
-            ],              
-            "links": ["flask", "actions"]
-        },
-        {
-            "name": "actions",
-            "image": "rasa/rasa-sdk:1.10.1",
-            "hostname": "actions",
-            "essential": false,
-            "memory": 900,
-            "memoryReservation": 90,
-            "command": ["start", "--actions", "actions"],
-            "mountPoints": [
-                {
-                  "containerPath": "/app/actions",
-                  "sourceVolume": "Actions"
-                }
-              ],
-            "portMappings": [
-                {
-                    "hostPort": 5055,
-                    "containerPort": 5055
-                }
-            ]
         }
     ]
 }
