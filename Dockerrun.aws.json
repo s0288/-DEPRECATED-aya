@@ -16,10 +16,16 @@
       ],
     "containerDefinitions": [
         {
-            "name": "telegram",
-            "image": "s0288/telegram",
-            "hostname": "telegram",
-            "essential": true,
+            "name": "flask",
+            "image": "s0288/flask",
+            "hostname": "flask",
+            "essential": false,
+            "portMappings": [
+                {
+                    "hostPort": 5000,
+                    "containerPort": 5000
+                }
+            ],
             "memory": 900
         }
     ]
