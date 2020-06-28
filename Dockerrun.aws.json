@@ -68,7 +68,7 @@
             "command": ["start", "--actions", "actions"],
             "mountPoints": [
                 {
-                  "containerPath": "/app/rasa/actions",
+                  "containerPath": "/app/actions",
                   "sourceVolume": "Actions"
                 }
               ],
