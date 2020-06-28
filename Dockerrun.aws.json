@@ -14,7 +14,6 @@
             "image": "s0288/telegram",
             "hostname": "telegram",
             "essential": true,
-            "links": ["rasa"],
             "memory": 128
         },
         {
@@ -48,7 +47,7 @@
                   "readOnly": true
                 }
               ],
-            "links": ["flask", "actions"],
+            "links": ["telegram", "flask", "actions"],
             "memory": 128
         },
         {
