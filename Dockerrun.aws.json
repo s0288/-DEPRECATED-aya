@@ -14,6 +14,7 @@
             "image": "s0288/telegram:latest",
             "hostname": "telegram",
             "essential": true,
+            "links": ["rasa"]
             "memory": 128
         },
         {
@@ -46,7 +47,7 @@
                   "containerPath": "./app"
                 }
               ],
-            "links": ["telegram", "flask", "actions"],
+            "links": ["flask", "actions"],
             "memoryReservation": 512
         },
         {
