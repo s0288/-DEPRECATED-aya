@@ -9,3 +9,4 @@ Read_me.rtf
 *.egg-info
 *.sh
 .env
+*.pem
