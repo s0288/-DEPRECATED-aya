@@ -11,14 +11,14 @@
     "containerDefinitions": [
         {
             "name": "telegram",
-            "image": "s0288/telegram",
+            "image": "s0288/telegram:latest",
             "hostname": "telegram",
             "essential": true,
             "memory": 128
         },
         {
             "name": "flask",
-            "image": "s0288/flask",
+            "image": "s0288/flask:latest",
             "hostname": "flask",
             "essential": true,
             "portMappings": [
@@ -31,7 +31,7 @@
         },
         {
             "name": "rasa",
-            "image": "s0288/rasa",
+            "image": "s0288/rasa:latest",
             "hostname": "rasa",
             "essential": false,
             "portMappings": [
@@ -48,11 +48,11 @@
                 }
               ],
             "links": ["telegram", "flask", "actions"],
-            "memory": 128
+            "memoryReservation": 512
         },
         {
             "name": "actions",
-            "image": "s0288/actions",
+            "image": "s0288/actions:latest",
             "hostname": "actions",
             "essential": true,
             "portMappings": [
