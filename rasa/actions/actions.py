@@ -11,9 +11,9 @@ from rasa_sdk.events import SlotSet, ReminderScheduled, ReminderCancelled, Follo
 from rasa_sdk.executor import CollectingDispatcher
 
 import datetime 
-import src.db_actions
+# import src.db_actions
 
-Actions_DB = src.db_actions.Actions_DB()
+# Actions_DB = src.db_actions.Actions_DB()
 
 
 #### STARTING AND ENDING A FAST
@@ -37,7 +37,7 @@ class ActionStartFast(Action):
         value = created_at
         received_at = created_at
 
-        Actions_DB.add_action(name, created_at, platform_user_id, platform_name, value, received_at)
+        # Actions_DB.add_action(name, created_at, platform_user_id, platform_name, value, received_at)
 
         # set slots and schedule a reminder
         return [SlotSet("is_fasting", 1), SlotSet("start_fast", created_at), FollowupAction("action_set_reminder_16h")]
@@ -59,8 +59,8 @@ class ActionFastingSince(Action):
         start_fast = tracker.get_slot('start_fast')
 
         # if slot is not set, get the most recent value in the database
-        if start_fast == 'None': # Rasa converts None to 'None'
-            start_fast = Actions_DB.get_last_start_fast(415604082, 'Telegram')
+        # if start_fast == 'None': # Rasa converts None to 'None'
+        #     start_fast = Actions_DB.get_last_start_fast(415604082, 'Telegram')
 
         ## if user is currently fasting, set text slots
         ## calculate time_fasted        
@@ -112,7 +112,7 @@ class ActionEndFast(Action):
         platform_name = 'Telegram'
         value = created_at
         received_at = created_at
-        Actions_DB.add_action(name, created_at, platform_user_id, platform_name, value, received_at)
+        # Actions_DB.add_action(name, created_at, platform_user_id, platform_name, value, received_at)
 
         return [SlotSet("is_fasting", 0), SlotSet("start_fast", None), SlotSet("hours_fasted", "0 Stunden"), SlotSet("mins_fasted", "0 Minuten"), FollowupAction("action_forget_reminder_16h")]
 

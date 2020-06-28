@@ -20,8 +20,6 @@ services:
             - "5000:5000"
     rasa:
         image: rasa/rasa:1.10.3-full
-        environment:
-            - POSTGRES=${POSTGRES}
         networks:
             - aya
         ports:
@@ -29,16 +27,20 @@ services:
         volumes:
             - ./rasa:/app
         command: run
+        depends_on:
+            - actions
     actions:
-        image: s0288/actions
-        environment:
-            - POSTGRES=${POSTGRES}
+        image: rasa/rasa-sdk:1.10.1
         networks:
             - aya
         ports:
             - "5055:5055"
         volumes:
-            - ./rasa:/app/rasa
+            - ./rasa/actions:/app/actions
+        command:
+            - start
+            - --actions
+            - actions
 
 networks:
     aya:

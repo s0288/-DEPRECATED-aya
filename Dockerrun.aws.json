@@ -9,7 +9,7 @@
         },
         {
             "host": {
-                "sourcePath": "/var/app/current/rasa"
+                "sourcePath": "/var/app/current/rasa/actions"
             },
             "name": "Actions"
         }
@@ -43,9 +43,7 @@
             "essential": true,
             "memory": 900,
             "memoryReservation": 512,
-            "command": [
-                "run"
-            ],
+            "command": ["run"],
             "mountPoints": [
                 {
                   "containerPath": "/app",
@@ -62,12 +60,15 @@
         },
         {
             "name": "actions",
-            "image": "s0288/actions",
+            "image": "rasa/rasa-sdk:1.10.1",
             "hostname": "actions",
             "essential": true,
+            "memory": 128,
+            "memoryReservation": 90,
+            "command": ["start", "--actions", "actions"],
             "mountPoints": [
                 {
-                  "containerPath": "/app/rasa",
+                  "containerPath": "/app/rasa/actions",
                   "sourceVolume": "Actions"
                 }
               ],
@@ -76,8 +77,7 @@
                     "hostPort": 5055,
                     "containerPort": 5055
                 }
-            ],
-            "memory": 128
+            ]
         }
     ]
 }
