@@ -4,7 +4,7 @@
         {
           "name": "rasa-app",
           "host": {
-            "sourcePath": "/var/app/rasa"
+            "sourcePath": "./app/rasa"
           }
         }  
       ],
@@ -43,7 +43,7 @@
             "mountPoints": [
                 {
                   "sourceVolume": "rasa-app",
-                  "containerPath": "/var/app",
+                  "containerPath": "/app",
                   "readOnly": true
                 }
               ],
