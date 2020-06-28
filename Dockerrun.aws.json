@@ -14,7 +14,7 @@
             "image": "s0288/telegram:latest",
             "hostname": "telegram",
             "essential": true,
-            "links": ["rasa"]
+            "links": ["rasa"],
             "memory": 128
         },
         {
