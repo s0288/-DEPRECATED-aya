@@ -2,9 +2,9 @@
     "AWSEBDockerrunVersion": 2,
     "volumes": [
         {
-          "name": "rasa-volume",
+          "name": "rasa",
           "host": {
-            "sourcePath": "./app/rasa"
+            "sourcePath": "./app"
           }
         }  
       ],
@@ -14,7 +14,7 @@
             "image": "s0288/telegram:latest",
             "hostname": "telegram",
             "essential": true,
-            "links": ["rasa-app"],
+            "links": ["rasa"],
             "memory": 128
         },
         {
@@ -31,7 +31,7 @@
             "memory": 128
         },
         {
-            "name": "rasa-app",
+            "name": "rasa",
             "image": "s0288/rasa:latest",
             "hostname": "rasa",
             "essential": false,
@@ -43,7 +43,7 @@
             ],
             "mountPoints": [
                 {
-                  "sourceVolume": "rasa-volume",
+                  "sourceVolume": "rasa",
                   "containerPath": "./app"
                 }
               ],
