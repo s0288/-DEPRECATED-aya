@@ -9,7 +9,7 @@ import src_main.config
 class TestRasaAvailability(unittest.TestCase):
     ## test that sending of messages is possible
     def test_communicating_with_rasa(self):
-        sending = src_main.call_webhook(os.environ["TEST_USER"], 'hi')
+        sending = src_main.call_webhook(os.environ.get("TEST_USER"), 'hi')
         self.assertEqual(sending, 'success')
 
 

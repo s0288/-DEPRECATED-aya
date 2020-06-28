@@ -15,7 +15,7 @@ import src.db_global
 
 class Telegram_DB:
     def __init__(self):
-        engine = create_engine(os.environ["POSTGRES"])
+        engine = create_engine(os.environ.get("POSTGRES"))
         metadata = MetaData(engine)
         self.conn = engine.connect()
         ## check if databases have been created already

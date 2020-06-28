@@ -18,7 +18,7 @@ import src.call_webhook
 
 Telegram_DB = src.db_telegram_bot.Telegram_DB()
 
-URL = f"https://api.telegram.org/bot{os.environ['TELEGRAM_TOKEN']}/"
+URL = f"https://api.telegram.org/bot{os.environ.get('TELEGRAM_TOKEN')}/"
 
 class Telegram_Bot:
 # ------ save message to db

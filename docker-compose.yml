@@ -20,6 +20,8 @@ services:
             - "5000:5000"
     rasa:
         image: rasa/rasa:1.10.3-full
+        environment:
+            - POSTGRES=${POSTGRES}
         networks:
             - aya
         ports:
@@ -29,6 +31,8 @@ services:
         command: run
     actions:
         image: s0288/actions
+        environment:
+            - POSTGRES=${POSTGRES}
         networks:
             - aya
         ports:

@@ -16,7 +16,7 @@ import logging
 #### event class
 class Actions_DB:
     def __init__(self):
-        engine = create_engine(os.environ["POSTGRES"])
+        engine = create_engine(os.environ.get("POSTGRES"))
         metadata = MetaData(engine)
         self.conn = engine.connect()
 

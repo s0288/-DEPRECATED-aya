@@ -50,7 +50,7 @@ if __name__ == '__main__':
     from sqlalchemy import *
     import datetime
     
-    engine = create_engine(os.environ["POSTGRES"])
+    engine = create_engine(os.environ.get("POSTGRES"))
     metadata = MetaData(engine)
     conn = engine.connect()
     
