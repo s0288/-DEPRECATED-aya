@@ -1,19 +1,5 @@
 {
     "AWSEBDockerrunVersion": 2,
-    "volumes": [
-        {
-          "host": {
-                "sourcePath": "/var/app/current/rasa"
-            },
-            "name": "Rasa"
-        },
-        {
-            "host": {
-                "sourcePath": "/var/app/current/rasa/actions"
-            },
-            "name": "Actions"
-        }
-      ],
     "containerDefinitions": [
         {
             "name": "flask",
