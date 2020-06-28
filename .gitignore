@@ -7,3 +7,5 @@ Read_me.rtf
 *.sql
 *.tar.gz
 *.egg-info
+*.sh
+.env

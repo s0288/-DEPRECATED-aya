@@ -3,10 +3,17 @@ version: '3'
 services:
     telegram:
         image: s0288/telegram
+        environment:
+            - POSTGRES=${POSTGRES}
+            - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+            - RASA_WEBHOOK=${RASA_WEBHOOK}
         networks:
             - aya
     flask:
         image: s0288/flask
+        environment:
+            - POSTGRES=${POSTGRES}
+            - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
         networks:
             - aya
         ports:

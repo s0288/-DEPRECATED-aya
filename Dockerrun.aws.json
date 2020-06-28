@@ -43,8 +43,7 @@
             "mountPoints": [
                 {
                   "sourceVolume": "rasa-app",
-                  "containerPath": "/app",
-                  "readOnly": true
+                  "containerPath": "./app"
                 }
               ],
             "links": ["telegram", "flask", "actions"],
