@@ -2,11 +2,17 @@
     "AWSEBDockerrunVersion": 2,
     "volumes": [
         {
-          "name": "rasa",
           "host": {
-            "sourcePath": "/var/app/current"
-          }
-        }  
+                "sourcePath": "/var/app/current/rasa"
+            },
+            "name": "Rasa"
+        },
+        {
+            "host": {
+                "sourcePath": "/var/app/current/rasa"
+            },
+            "name": "Actions"
+        }
       ],
     "containerDefinitions": [
         {
@@ -32,29 +38,39 @@
         },
         {
             "name": "rasa",
-            "image": "s0288/rasa",
+            "image": "rasa/rasa:1.10.3-full",
             "hostname": "rasa",
-            "essential": false,
+            "essential": true,
+            "memory": 900,
+            "memoryReservation": 512,
+            "command": [
+                "run"
+            ],
+            "mountPoints": [
+                {
+                  "containerPath": "/app",
+                  "sourceVolume": "Rasa"
+                }
+              ],
             "portMappings": [
                 {
                     "hostPort": 5005,
                     "containerPort": 5005
                 }
-            ],
-            "mountPoints": [
-                {
-                  "sourceVolume": "rasa",
-                  "containerPath": "/app"
-                }
-              ],
-            "links": ["flask", "actions"],
-            "memoryReservation": 512
+            ],              
+            "links": ["flask", "actions"]
         },
         {
             "name": "actions",
             "image": "s0288/actions",
             "hostname": "actions",
             "essential": true,
+            "mountPoints": [
+                {
+                  "containerPath": "/app/rasa",
+                  "sourceVolume": "Actions"
+                }
+              ],
             "portMappings": [
                 {
                     "hostPort": 5055,

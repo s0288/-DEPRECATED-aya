@@ -19,13 +19,14 @@ services:
         ports:
             - "5000:5000"
     rasa:
-        image: s0288/rasa
+        image: rasa/rasa:1.10.3-full
         networks:
             - aya
         ports:
             - "5005:5005"
         volumes:
             - ./rasa:/app
+        command: run
     actions:
         image: s0288/actions
         networks:
