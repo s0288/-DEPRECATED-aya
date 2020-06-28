@@ -11,7 +11,7 @@
             "host": {
                 "sourcePath": "/var/app/current/rasa"
             },
-            "name": "Actions"
+            "name": "Rasa Actions"
         }
       ],
     "containerDefinitions": [
@@ -54,8 +54,8 @@
               ],
             "portMappings": [
                 {
-                    "hostPort": 5005,
-                    "containerPort": 5005
+                    "containerPort": 5005,
+                    "hostPort": 80
                 }
             ],              
             "links": ["flask", "actions"]
@@ -68,7 +68,7 @@
             "mountPoints": [
                 {
                   "containerPath": "/app/rasa",
-                  "sourceVolume": "Actions"
+                  "sourceVolume": "Rasa Actions"
                 }
               ],
             "portMappings": [
