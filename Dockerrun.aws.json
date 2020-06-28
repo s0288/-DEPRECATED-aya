@@ -14,7 +14,7 @@
             "image": "s0288/telegram:latest",
             "hostname": "telegram",
             "essential": true,
-            "links": ["rasa"],
+            "links": ["rasa-app"],
             "memory": 128
         },
         {
@@ -33,7 +33,7 @@
         {
             "name": "rasa",
             "image": "s0288/rasa:latest",
-            "hostname": "rasa",
+            "hostname": "rasa-app",
             "essential": false,
             "portMappings": [
                 {
