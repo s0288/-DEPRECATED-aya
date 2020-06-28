@@ -23,8 +23,8 @@
             "essential": false,
             "portMappings": [
                 {
-                    "hostPort": 5000,
-                    "containerPort": 5000
+                    "containerPort": 5000,
+                    "hostPort": 5000
                 }
             ],
             "memory": 900
@@ -46,7 +46,7 @@
             "portMappings": [
                 {
                     "containerPort": 5005,
-                    "hostPort": 5005
+                    "hostPort": 80
                 }
             ],              
             "links": ["flask"]
