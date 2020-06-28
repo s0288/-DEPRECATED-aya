@@ -26,7 +26,7 @@
             "name": "flask",
             "image": "s0288/flask",
             "hostname": "flask",
-            "essential": true,
+            "essential": false,
             "portMappings": [
                 {
                     "hostPort": 5000,
@@ -39,7 +39,7 @@
             "name": "rasa",
             "image": "rasa/rasa:1.10.3-full",
             "hostname": "rasa",
-            "essential": true,
+            "essential": false,
             "memory": 900,
             "memoryReservation": 512,
             "command": ["run"],
@@ -61,7 +61,7 @@
             "name": "actions",
             "image": "rasa/rasa-sdk:1.10.1",
             "hostname": "actions",
-            "essential": true,
+            "essential": false,
             "memory": 128,
             "memoryReservation": 90,
             "command": ["start", "--actions", "actions"],
