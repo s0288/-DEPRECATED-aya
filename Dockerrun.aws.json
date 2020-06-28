@@ -4,7 +4,7 @@
         {
           "name": "rasa-app",
           "host": {
-            "sourcePath": "/var/app/rasa"
+            "sourcePath": "/var/rasa"
           }
         }  
       ],
