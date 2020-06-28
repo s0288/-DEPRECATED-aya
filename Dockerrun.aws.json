@@ -1,5 +1,13 @@
 {
     "AWSEBDockerrunVersion": 2,
+    "volumes": [
+        {
+          "host": {
+                "sourcePath": "/var/app/current/src"
+            },
+            "name": "src"
+        }
+      ],
     "containerDefinitions": [
         {
             "name": "flask",
