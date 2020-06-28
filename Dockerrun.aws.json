@@ -1,17 +1,9 @@
 {
     "AWSEBDockerrunVersion": 2,
-    "volumes": [
-        {
-          "name": "rasa",
-          "host": {
-            "sourcePath": "./app"
-          }
-        }  
-      ],
     "containerDefinitions": [
         {
             "name": "telegram",
-            "image": "s0288/telegram:latest",
+            "image": "s0288/telegram",
             "hostname": "telegram",
             "essential": true,
             "links": ["rasa"],
@@ -19,7 +11,7 @@
         },
         {
             "name": "flask",
-            "image": "s0288/flask:latest",
+            "image": "s0288/flask",
             "hostname": "flask",
             "essential": true,
             "portMappings": [
@@ -32,7 +24,7 @@
         },
         {
             "name": "rasa",
-            "image": "s0288/rasa:latest",
+            "image": "s0288/rasa",
             "hostname": "rasa",
             "essential": false,
             "portMappings": [
@@ -41,18 +33,12 @@
                     "containerPort": 5005
                 }
             ],
-            "mountPoints": [
-                {
-                  "sourceVolume": "rasa",
-                  "containerPath": "./app"
-                }
-              ],
             "links": ["flask", "actions"],
             "memoryReservation": 512
         },
         {
             "name": "actions",
-            "image": "s0288/actions:latest",
+            "image": "s0288/actions",
             "hostname": "actions",
             "essential": true,
             "portMappings": [
