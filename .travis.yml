@@ -24,7 +24,7 @@ deploy:
     provider: elasticbeanstalk
     region: eu-central-1
     app: aya
-    env: aya-beanstalk
+    env: Aya-env
     bucket_name: elasticbeanstalk-eu-central-1-447969878826
     bucket_path: aya-bucket
     on:
