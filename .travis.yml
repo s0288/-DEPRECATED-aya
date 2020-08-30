@@ -18,16 +18,3 @@ after_success:
     # push to Docker Hub
     - docker push s0288/telegram
     - docker push s0288/flask
-
-deploy:
-    edge: true
-    provider: elasticbeanstalk
-    region: eu-central-1
-    app: aya
-    env: Aya-env
-    bucket_name: elasticbeanstalk-eu-central-1-447969878826
-    bucket_path: aya-bucket
-    on:
-        branch: master
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
