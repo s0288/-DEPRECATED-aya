@@ -13,7 +13,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/bot', methods=['POST'])
-def webhook():    
+def webhook():
     response = request.get_json(silent=True)
     send_elements = get_send_elements(response)
     # send outgoing message
