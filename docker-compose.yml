@@ -28,6 +28,8 @@ services:
             - ./rasa:/app
         command: 
             - run
+            - --response_log 
+            - logs
         depends_on:
             - actions
     actions:
