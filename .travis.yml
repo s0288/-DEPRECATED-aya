@@ -12,7 +12,7 @@ services:
 
 after_success:
     - docker build -t s0288/telegram:latest .
-    - docker build -t s2088/flask:latest .
+    - docker build -t s2088/flask:latest -f Dockerfile.flask .
     # Log in to Docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # push to Docker Hub
