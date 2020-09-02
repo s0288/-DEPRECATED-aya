@@ -17,6 +17,8 @@
   - utter_greet
 * how_are_you
   - utter_I_am_fine
+* affirm
+  - utter_ok
 
 ## sad path 1
 * greet
