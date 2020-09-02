@@ -78,7 +78,7 @@
 * fast_length_so_far
   - action_fasting_since
   - slot{"is_fasting" : 0}
-  - utter_ask_fast
+  - utter_info_not_fasting_ask_fast
 * affirm
   - utter_start_fast
   - action_start_fast
@@ -87,7 +87,7 @@
 * fast_length_so_far
   - action_fasting_since
   - slot{"is_fasting" : 0}
-  - utter_ask_fast
+  - utter_info_not_fasting_ask_fast
 * deny
   - utter_ok
 
