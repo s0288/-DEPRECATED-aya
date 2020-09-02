@@ -63,11 +63,15 @@
 ## intent:mood_great
 - gut
 - perfekt
-- super
+- mir geht es super
+- fühle mich super
+- mir gehts klasse
 - very good
-- sehr gut
+- fühl mich sehr gut
 - hervorragend
 - wunderbar
+- alles prima
+- alles paletti
 - mir geht es sehr gut
 - ich fühle mich sehr gut
 - großartig
@@ -106,11 +110,20 @@
 - fasten starten
 - fasten
 - start
+- ich will fasten
+- fastenbeginn
+- beginn fasten
+- start fasten
 
 ## intent:fast_length_so_far
 - wie lange faste ich schon?
 - wann habe ich 16 Stunden geschafft?
 - ist es bald vorbei?
+- faste ich schon?
+- bin ich schon am fasten?
+- habe ich es bald geschafft?
+- hab ichs bald hinter mir?
+- wie lange noch?
 
 ## intent:fast_end
 - stop

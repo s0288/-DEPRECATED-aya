@@ -66,6 +66,12 @@
   - slot{"is_fasting" : 1}
   - utter_info_fast
 
+## fast length while fasting
+* fast_length_so_far
+  - action_fasting_since
+  - slot{"is_fasting" : 1}
+  - utter_info_fast
+
 ## fast length without fasting yes
 * fast_length_so_far
   - action_fasting_since
