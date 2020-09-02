@@ -9,6 +9,18 @@
 - guten abend
 - guten mittag
 - servus
+- hello
+
+## intent:how_are_you
+- wie geht es dir?
+- und dir?
+- wie fühlst du dich?
+- und wie ist es bei dir?
+- und wie geht es dir?
+- wie geht's dir?
+- wie gehts dir?
+- und wie ists bei dir?
+- und bei dir?
 
 ## intent:goodbye
 - bye
@@ -94,6 +106,11 @@
 - fasten starten
 - fasten
 - start
+
+## intent:fast_length_so_far
+- wie lange faste ich schon?
+- wann habe ich 16 Stunden geschafft?
+- ist es bald vorbei?
 
 ## intent:fast_end
 - stop

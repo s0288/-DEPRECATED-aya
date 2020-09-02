@@ -32,7 +32,9 @@ intents:
 - fast_end
 - affirm
 - fast_start
+- fast_length_so_far
 - greet
+- how_are_you
 - deny
 - start
 - goodbye
@@ -59,13 +61,6 @@ responses:
     - payload: nein
       title: nein
     text: Möchtest du fasten?
-
-  utter_cheer_up:
-  - image: https://i.imgur.com/nGF1K8f.jpg
-    text: 'Das muntert dich vielleicht auf:'
-  
-  utter_did_that_help:
-  - text: Hat dir das geholfen?
   
   utter_end_fast:
   - text: Ich habe deine Fastenuhr gestoppt. Du hast {hours_fasted} und {mins_fasted}
@@ -82,9 +77,32 @@ responses:
   
   utter_happy:
   - text: Super, weiter so!
+  - text: Das freut mich.
+  - text: Das klingt schön.
+  - text: Wunderbar
   
+  utter_express_empathy:
+    - text: Das ist schade.
+    - text: Ich bin hier, wenn du reden möchtest.
+    - text: Das tut mir leid zu hören.
+
+  utter_I_am_fine:
+    - text: Mir geht es gut, danke.
+    - text: Ein bisschen langweilig ...
+    - text: Ich habe viel gelesen heute. Das hat mir gefallen.
+    - text: Ich fühle mich etwas nachdenklich heute.
+    - text: Ich glaube mir geht es so wie dir heute.
+
   utter_info_fast:
   - text: Du fastest seit {hours_fasted} und {mins_fasted}.
+
+  utter_info_not_fasting_ask_fast:
+    - buttons:
+      - payload: ja
+        title: ja
+      - payload: nein
+        title: nein
+      text: Du fastest aktuell nicht. Möchtest du starten?
   
   utter_no_problem:
   - text: kein Problem

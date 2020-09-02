@@ -12,12 +12,17 @@
 * mood_great
   - utter_happy
 
+## how are you
+* greet
+  - utter_greet
+* how_are_you
+  - utter_I_am_fine
+
 ## sad path 1
 * greet
   - utter_greet
 * mood_unhappy
-  - utter_cheer_up
-  - utter_did_that_help
+  - utter_express_empathy
 * affirm
   - utter_happy
 
@@ -25,8 +30,7 @@
 * greet
   - utter_greet
 * mood_unhappy
-  - utter_cheer_up
-  - utter_did_that_help
+  - utter_express_empathy
 * deny
   - utter_ok
 
@@ -62,6 +66,23 @@
   - slot{"is_fasting" : 1}
   - utter_info_fast
 
+## fast length without fasting yes
+* fast_length_so_far
+  - action_fasting_since
+  - slot{"is_fasting" : 0}
+  - utter_ask_fast
+* affirm
+  - utter_start_fast
+  - action_start_fast
+
+## fast length without fasting no
+* fast_length_so_far
+  - action_fasting_since
+  - slot{"is_fasting" : 0}
+  - utter_ask_fast
+* deny
+  - utter_ok
+
 ## fast end 1
 * fast_end
   - action_fasting_since
@@ -71,7 +92,6 @@
   - utter_end_fast
   - action_end_fast
   
-
 ## fast end 2
 * fast_end
   - action_fasting_since
