@@ -53,6 +53,7 @@
 * affirm
   - utter_start_fast
   - action_start_fast
+  - slot{"is_fasting" : 1}
 
 ## fast start no
 * fast_start
@@ -82,6 +83,7 @@
 * affirm
   - utter_start_fast
   - action_start_fast
+  - slot{"is_fasting" : 1}
 
 ## fast length without fasting no
 * fast_length_so_far
@@ -99,6 +101,7 @@
 * affirm
   - utter_end_fast
   - action_end_fast
+  - slot{"is_fasting" : 1}
   
 ## fast end 2
 * fast_end
