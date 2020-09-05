@@ -121,7 +121,7 @@ class ActionEndFast(Action):
 #### REMINDERS
 
 class SetReminder16h(Action):
-    """ Creates a reminder for the bot to tell the user that he fasted 16 hours already """
+    """ Creates a reminder to tell the user he fasted 16 hours already """
 
     def name(self) -> Text:
         return "action_set_reminder_16h"

@@ -74,6 +74,10 @@ responses:
   utter_greet:
   - text: Hey! Wie geht es dir? :)
   - text: Hallo. Wie fühlst du dich?
+  - text: Hey, wie geht es dir?
+  - text: Hi. Wie fühlst du dich gerade?
+  - text: Hallo. Wie geht es dir heute?
+  - text: Guten Tag. Wie fühlst du dich?
   
   utter_happy:
   - text: Super, weiter so!
