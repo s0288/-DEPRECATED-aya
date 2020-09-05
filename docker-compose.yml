@@ -22,6 +22,7 @@ services:
         image: rasa/rasa:1.10.3-full
         environment:
             - AYA_TRACKER_DB_HOST=${AYA_TRACKER_DB_HOST}
+            - AYA_TRACKER_DB_DB=${AYA_TRACKER_DB_DB}
             - AYA_TRACKER_DB_USER=${AYA_TRACKER_DB_USER}
             - AYA_TRACKER_DB_PW=${AYA_TRACKER_DB_PW}
         networks:
