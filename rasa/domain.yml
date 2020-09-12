@@ -103,6 +103,12 @@ responses:
     - text: in Ordnung
     - text: verstanden
 
+  utter_noted:
+    - text: ok, ist notiert
+    - text: habe ich notiert
+    - text: alles klar, ich merke es mir
+    - text: ist eingetragen
+
   ## fast stmts
   utter_ask_end_fast:
     - buttons:

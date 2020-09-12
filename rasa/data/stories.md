@@ -119,6 +119,6 @@
 ## weight value
 * weight_value
   - action_entity_extract
-  - utter_ok  
+  - utter_noted  
 
 <!-- journal-specific stories -->
