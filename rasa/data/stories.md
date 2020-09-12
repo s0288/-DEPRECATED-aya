@@ -5,12 +5,6 @@
 * mood_great
   - utter_happy
 
-## happy path
-* greet
-  - utter_greet
-* mood_great
-  - utter_happy
-
 ## how are you
 * greet
   - utter_greet
@@ -19,21 +13,17 @@
 * affirm
   - utter_ok
 
-## sad path 1
+## happy path
 * greet
   - utter_greet
-* mood_unhappy
-  - utter_express_empathy
-* affirm
+* mood_great
   - utter_happy
 
-## sad path 2
+## sad path
 * greet
   - utter_greet
 * mood_unhappy
   - utter_express_empathy
-* deny
-  - utter_ok
 
 ## say no problem
 * no_problem
@@ -117,6 +107,7 @@
 * affirm
   - utter_ask_weight_value
 * weight_value
+  - action_entity_extract
   - utter_ok
 
 ## weight add no
@@ -125,5 +116,9 @@
 * deny
   - utter_ok
 
+## weight value
+* weight_value
+  - action_entity_extract
+  - utter_ok  
 
 <!-- journal-specific stories -->

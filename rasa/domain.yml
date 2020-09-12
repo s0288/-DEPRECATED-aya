@@ -5,12 +5,14 @@ actions:
 - action_start_fast
 - action_set_reminder_16h
 - action_forget_reminder_16h
+- action_entity_extract
 
 entities:
 - is_fasting
 - start_fast
 - hours_fasted
 - mins_fasted
+- weight_value
 
 slots:
   hours_fasted:
@@ -26,6 +28,8 @@ slots:
   start_fast:
     type: unfeaturized
     initial_value: 'None' # rasa converts None to 'None' --> to prevent future errors, set 'None' right away
+  weight_value:
+    type: unfeaturized
 
 
 intents:
@@ -49,7 +53,7 @@ intents:
 responses:
   ## conversational stmts
   utter_start:
-    - text: Hey! Ich helfe dir zu fasten. Ich erfasse deine Fastenzeiten und kann dir Witze erzählen, wenn du schlechte Laune bekommst.
+    - text: Hey! Ich helfe dir zu fasten. Ich erfasse deine Fastenzeiten und muntere dich auf, wenn es dir schlecht geht.
     - buttons:
       - payload: ja
         title: ja

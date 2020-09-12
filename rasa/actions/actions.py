@@ -117,6 +117,30 @@ class ActionEndFast(Action):
         return [SlotSet("is_fasting", 0), SlotSet("start_fast", None), SlotSet("hours_fasted", "0 Stunden"), SlotSet("mins_fasted", "0 Minuten"), FollowupAction("action_forget_reminder_16h")]
 
 
+#### EXTRACT DATA
+class ActionEntityExtract(Action):
+    """ extract entity from msg """   
+
+    def name(self) -> Text:
+        return "action_entity_extract"
+
+    def run(self, 
+                dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any],
+            ) -> List[Dict[Text, Any]]:
+
+        ## extract entity
+        entities = tracker.latest_message['entities']
+        print(entities)
+
+        for e in entities:
+            if e['entity'] == 'weight_value':
+                weight_value = e['value']
+
+        return [SlotSet("weight_value", weight_value)]
+
+
 
 #### REMINDERS
 

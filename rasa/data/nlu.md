@@ -78,6 +78,7 @@
 - mir geht es gut
 - perfect
 - happy
+- es geht mir gut
 
 ## intent:mood_unhappy
 - sad
@@ -93,6 +94,9 @@
 - nicht sehr gut
 - so schade
 - nicht gut
+- es geht mir schlecht
+- mir geht es schlecht
+- ich fühle mich nicht so gut
 
 ## intent:no_problem
 - danke
@@ -145,20 +149,23 @@
 - gewicht eintragen
 - kg
 - kilogramm
-- ich wiege 74 kilo
 - kilos
 - kilo
-- 99 kilo
-- 68 kilos
 
 ## intent:weight_value
-- 66
-- 58
-- 74
-- 58 kg
-- 84 kilo
-- 92kg
-- 102kilogramm
-- 76 kilogramm
-- 55 KG
+- [66](weight_value)
+- [58](weight_value)
+- [74](weight_value)
+- [58](weight_value) kg
+- [84](weight_value) kilo
+- [92](weight_value) kg
+- [102](weight_value) kilogramm
+- [76](weight_value) kilogramm
+- [55](weight_value) KG
+- [113](weight_value) Kilogramm
+- ich habe [88](weight_value) kg gewogen
+- ich wiege [81](weight_value) kilo
+- [99](weight_value) kilo
+- [68](weight_value) kilos
+- ich wiege [74](weight_value) kilo
 
