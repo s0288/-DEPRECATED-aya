@@ -15,10 +15,6 @@ entities:
 - weight_value
 
 slots:
-  hours_fasted:
-    type: unfeaturized
-  mins_fasted:
-    type: unfeaturized
   is_fasting:
     initial_value: 0
     type: categorical
@@ -28,6 +24,10 @@ slots:
   start_fast:
     type: unfeaturized
     initial_value: 'None' # rasa converts None to 'None' --> to prevent future errors, set 'None' right away
+  hours_fasted:
+    type: unfeaturized
+  mins_fasted:
+    type: unfeaturized
   weight_value:
     type: unfeaturized
 
@@ -62,23 +62,23 @@ responses:
       text: Möchtest du jetzt fasten?  
 
   utter_goodbye:
-  - text: Ciao
-  - text: Bis bald
-  - text: Mach's gut
+    - text: Ciao
+    - text: Bis bald
+    - text: Mach's gut
   
   utter_greet:
-  - text: Hey! Wie geht es dir? :)
-  - text: Hallo. Wie fühlst du dich?
-  - text: Hey, wie geht es dir?
-  - text: Hi. Wie fühlst du dich gerade?
-  - text: Hallo. Wie geht es dir heute?
-  - text: Guten Tag. Wie fühlst du dich?
+    - text: Hey! Wie geht es dir? :)
+    - text: Hallo. Wie fühlst du dich?
+    - text: Hey, wie geht es dir?
+    - text: Hi. Wie fühlst du dich gerade?
+    - text: Hallo. Wie geht es dir heute?
+    - text: Guten Tag. Wie fühlst du dich?
   
   utter_happy:
-  - text: Super, weiter so!
-  - text: Das freut mich.
-  - text: Das klingt schön.
-  - text: Wunderbar
+    - text: Super, weiter so!
+    - text: Das freut mich.
+    - text: Das klingt schön.
+    - text: Wunderbar
   
   utter_express_empathy:
     - text: Das ist schade.
@@ -93,37 +93,37 @@ responses:
     - text: Ich glaube mir geht es so wie dir heute.
   
   utter_no_problem:
-  - text: kein Problem
-  - text: gern geschehen
-  - text: gerne
+    - text: kein Problem
+    - text: gern geschehen
+    - text: gerne
   
   utter_ok:
-  - text: ok
-  - text: alles klar
-  - text: in Ordnung
-  - text: verstanden
+    - text: ok
+    - text: alles klar
+    - text: in Ordnung
+    - text: verstanden
 
   ## fast stmts
   utter_ask_end_fast:
-  - buttons:
-    - payload: ja
-      title: ja
-    - payload: nein
-      title: nein
-    text: Du fastest seit {hours_fasted} und {mins_fasted}. Möchtest du das Fasten
-      jetzt beenden?
+    - buttons:
+      - payload: ja
+        title: ja
+      - payload: nein
+        title: nein
+      text: Du fastest seit {hours_fasted} und {mins_fasted}. Möchtest du das Fasten
+        jetzt beenden?
   
   utter_ask_fast:
-  - buttons:
-    - payload: ja
-      title: ja
-    - payload: nein
-      title: nein
-    text: Möchtest du fasten?
+    - buttons:
+      - payload: ja
+        title: ja
+      - payload: nein
+        title: nein
+      text: Möchtest du fasten?
   
   utter_end_fast:
-  - text: Ich habe deine Fastenuhr gestoppt. Du hast {hours_fasted} und {mins_fasted}
-      gefastet. Glückwunsch :)
+    - text: Ich habe deine Fastenuhr gestoppt. Du hast {hours_fasted} und {mins_fasted}
+        gefastet. Glückwunsch :)
 
   utter_info_fast:
     - text: Du fastest seit {hours_fasted} und {mins_fasted}.
