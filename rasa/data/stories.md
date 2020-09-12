@@ -1,7 +1,6 @@
 <!-- basic stories -->
 ## start
 * start
-  <!-- action_add_user -->
   - utter_start
 * mood_great
   - utter_happy
@@ -111,4 +110,20 @@
 * deny
   - utter_ok
 
-  <!-- journal-specific stories -->
+<!-- health-data-specific stories -->
+## weight add yes
+* weight_add
+  - utter_ask_weight
+* affirm
+  - utter_ask_weight_value
+* weight_value
+  - utter_ok
+
+## weight add no
+* weight_add
+  - utter_ask_weight
+* deny
+  - utter_ok
+
+
+<!-- journal-specific stories -->

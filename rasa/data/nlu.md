@@ -132,3 +132,33 @@
 - ende
 - fasten beenden
 - aufhören
+
+## intent:weight_add
+- ich habe mich gewogen
+- wiegen
+- waage
+- ich will mein gewicht angeben
+- ich möchte mein gewicht angeben
+- will gewicht eintragen
+- gewicht angeben
+- gewogen
+- gewicht eintragen
+- kg
+- kilogramm
+- ich wiege 74 kilo
+- kilos
+- kilo
+- 99 kilo
+- 68 kilos
+
+## intent:weight_value
+- 66
+- 58
+- 74
+- 58 kg
+- 84 kilo
+- 92kg
+- 102kilogramm
+- 76 kilogramm
+- 55 KG
+

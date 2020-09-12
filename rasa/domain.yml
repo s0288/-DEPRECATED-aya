@@ -42,30 +42,21 @@ intents:
 - mood_unhappy
 - no_problem
 - 16h_fast_reminder: {triggers: utter_reminder_16h}
+- weight_add
+- weight_value
 
 
 responses:
-  utter_ask_end_fast:
-  - buttons:
-    - payload: ja
-      title: ja
-    - payload: nein
-      title: nein
-    text: Du fastest seit {hours_fasted} und {mins_fasted}. Möchtest du das Fasten
-      jetzt beenden?
-  
-  utter_ask_fast:
-  - buttons:
-    - payload: ja
-      title: ja
-    - payload: nein
-      title: nein
-    text: Möchtest du fasten?
-  
-  utter_end_fast:
-  - text: Ich habe deine Fastenuhr gestoppt. Du hast {hours_fasted} und {mins_fasted}
-      gefastet. Glückwunsch :)
-  
+  ## conversational stmts
+  utter_start:
+    - text: Hey! Ich helfe dir zu fasten. Ich erfasse deine Fastenzeiten und kann dir Witze erzählen, wenn du schlechte Laune bekommst.
+    - buttons:
+      - payload: ja
+        title: ja
+      - payload: nein
+        title: nein
+      text: Möchtest du jetzt fasten?  
+
   utter_goodbye:
   - text: Ciao
   - text: Bis bald
@@ -96,17 +87,6 @@ responses:
     - text: Ich habe viel gelesen heute. Das hat mir gefallen.
     - text: Ich fühle mich etwas nachdenklich heute.
     - text: Ich glaube mir geht es so wie dir heute.
-
-  utter_info_fast:
-  - text: Du fastest seit {hours_fasted} und {mins_fasted}.
-
-  utter_info_not_fasting_ask_fast:
-    - buttons:
-      - payload: ja
-        title: ja
-      - payload: nein
-        title: nein
-      text: Du fastest aktuell nicht. Möchtest du starten?
   
   utter_no_problem:
   - text: kein Problem
@@ -115,21 +95,60 @@ responses:
   
   utter_ok:
   - text: ok
-  
-  utter_start:
+  - text: alles klar
+  - text: in Ordnung
+  - text: verstanden
+
+  ## fast stmts
+  utter_ask_end_fast:
   - buttons:
-    - payload: fasten
-      title: fasten
-    - payload: mehr Infos?
-      title: mehr Infos
-    text: Hey! Ich bin dein digitaler Begleiter und helfe dir zu fasten. Klicke auf
-      'fasten', um sofort zu starten, oder 'mehr Infos'.
+    - payload: ja
+      title: ja
+    - payload: nein
+      title: nein
+    text: Du fastest seit {hours_fasted} und {mins_fasted}. Möchtest du das Fasten
+      jetzt beenden?
   
+  utter_ask_fast:
+  - buttons:
+    - payload: ja
+      title: ja
+    - payload: nein
+      title: nein
+    text: Möchtest du fasten?
+  
+  utter_end_fast:
+  - text: Ich habe deine Fastenuhr gestoppt. Du hast {hours_fasted} und {mins_fasted}
+      gefastet. Glückwunsch :)
+
+  utter_info_fast:
+    - text: Du fastest seit {hours_fasted} und {mins_fasted}.
+  
+  utter_info_not_fasting_ask_fast:
+    - buttons:
+      - payload: ja
+        title: ja
+      - payload: nein
+        title: nein
+      text: Du fastest aktuell nicht. Möchtest du starten?
+    
   utter_start_fast:
-  - text: Ich habe deine Fastenuhr gestartet. Frohes Fasten!
-  
+    - text: Ich habe deine Fastenuhr gestartet. Frohes Fasten!
+    
   utter_reminder_16h:
-  - text: Du fastest seit 16 Stunden! :)
+    - text: Du fastest seit 16 Stunden! :)
+
+  ## health data stmts
+  utter_ask_weight:
+    - buttons:
+      - payload: ja
+        title: ja
+      - payload: nein
+        title: nein
+      text: Möchtest du dein Gewicht eintragen?
+
+  utter_ask_weight_value:
+    - text: Wie viel hast du gewogen?
 
 
 session_config:
