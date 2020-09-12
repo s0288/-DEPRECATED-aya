@@ -33,6 +33,7 @@ slots:
 
 
 intents:
+- start
 - fast_end
 - affirm
 - fast_start
@@ -40,7 +41,6 @@ intents:
 - greet
 - how_are_you
 - deny
-- start
 - goodbye
 - mood_great
 - mood_unhappy
