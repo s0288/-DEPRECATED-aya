@@ -14,6 +14,8 @@ entities:
 - mins_fasted
 - weight_value
 - fast_length
+- reflect_situation
+- reflect_remedy
 
 slots:
   is_fasting:
@@ -31,14 +33,19 @@ slots:
     type: unfeaturized
   weight_value:
     type: unfeaturized
+  reflect_situation:
+    type: unfeaturized
+  reflect_remedy:
+    type: unfeaturized
+  requested_slot:
+    type: unfeaturized
 
+forms:
+  - reflect_day_form
 
 intents:
 - start
-- fast_end
 - affirm
-- fast_start
-- fast_length_so_far
 - greet
 - how_are_you
 - deny
@@ -46,21 +53,27 @@ intents:
 - mood_great
 - mood_unhappy
 - no_problem
+# fast
+- fast_start
+- fast_length_so_far
+- fast_end
 - 16h_fast_reminder: {triggers: utter_reminder_16h}
+# health data
 - weight_add
 - weight_value
+# journal
+- reflect_day
 
 
 responses:
   ## conversational stmts
   utter_start:
-    - text: Hey! Ich helfe dir zu fasten. Ich erfasse deine Fastenzeiten und muntere dich auf, wenn es dir schlecht geht.
     - buttons:
       - payload: ja
         title: ja
       - payload: nein
         title: nein
-      text: Möchtest du jetzt fasten?  
+      text: Hey! Ich helfe dir zu fasten. Ich erfasse deine Fastenzeiten. Möchtest du jetzt fasten?  
 
   utter_goodbye:
     - text: Ciao
@@ -83,8 +96,9 @@ responses:
   
   utter_express_empathy:
     - text: Das ist schade.
-    - text: Ich bin hier, wenn du reden möchtest.
+    - text: Es scheint dir nicht gut zu gehen.
     - text: Das tut mir leid zu hören.
+    - text: Du wirkst nachdenklich.
 
   utter_I_am_fine:
     - text: Mir geht es gut, danke.
@@ -109,6 +123,11 @@ responses:
     - text: habe ich notiert
     - text: alles klar, ich merke es mir
     - text: ist eingetragen
+
+  utter_thank_you:
+    - text: Danke, dass du mir das erzählt hast.
+    - text: Vielen Dank für das Teilen deiner Gedanken.
+    - text: Danke, dass du das mit mir geteilt hast.
 
   ## fast stmts
   utter_ask_end_fast:
@@ -161,6 +180,34 @@ responses:
   utter_ask_weight_value:
     - text: Wie viel hast du gewogen?
 
+  ## journal stmts
+  utter_ask_talk:
+    - buttons:
+      - payload: ja
+        title: ja
+      - payload: nein
+        title: nein
+      text: Möchtest du beschreiben, was dich beschäftigt?
+
+  utter_ask_feelings:
+    - text: Was beschäftigt dich?
+    - text: Was geht dir durch den Kopf?
+
+  utter_ask_countermeasures:
+    - text: Wie möchtest du mit deiner Situation umgehen?
+    - text: Siehst du eine Möglichkeit, deine Situation zu verändern?
+    - text: Gibt es etwas, das du tun könntest, um dich wohler zu fühlen?
+
+  utter_ask_reflect_situation:
+    - text: Was beschäftigt dich?
+    - text: Was geht dir durch den Kopf?
+  
+  utter_ask_reflect_remedy:
+    - text: Wie möchtest du mit deiner Situation umgehen?
+    - text: Siehst du eine Möglichkeit, deine Situation zu verändern?
+    - text: Gibt es etwas, das du tun könntest, um dich wohler zu fühlen?      
+
+  
 
 session_config:
   carry_over_slots_to_new_session: true

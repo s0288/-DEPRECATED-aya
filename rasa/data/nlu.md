@@ -13,14 +13,14 @@
 
 ## intent:how_are_you
 - wie geht es dir?
-- und dir?
+- dir?
 - wie fühlst du dich?
-- und wie ist es bei dir?
-- und wie geht es dir?
+- wie ist es bei dir?
+- wie geht es dir?
 - wie geht's dir?
 - wie gehts dir?
-- und wie ists bei dir?
-- und bei dir?
+- wie ists bei dir?
+- bei dir?
 
 ## intent:goodbye
 - bye
@@ -61,31 +61,31 @@
 - ne
 
 ## intent:mood_great
-- gut
-- perfekt
-- mir geht es super
-- fühle mich super
-- mir gehts klasse
+- [gut](happy)
+- [perfekt](happy)
+- [mir geht es super](happy)
+- [fühle mich super](happy)
+- [mir gehts klasse](happy)
 - very good
-- fühl mich sehr gut
+- [fühl mich sehr gut](happy)
 - hervorragend
 - wunderbar
-- alles prima
+- [alles prima](happy)
 - alles paletti
-- mir geht es sehr gut
-- ich fühle mich sehr gut
+- [mir geht es sehr gut](happy)
+- [ich fühle mich sehr gut](happy)
 - großartig
-- mir geht es gut
+- [mir geht es gut](happy)
 - perfect
 - happy
-- es geht mir gut
+- [es geht mir gut](happy)
 
 ## intent:mood_unhappy
 - sad
 - unhappy
-- traurig
-- sehr traurig
-- unglücklich
+- [traurig](sad)
+- [sehr traurig](sad)
+- [unglücklich](sad)
 - bad
 - very bad
 - schlecht
@@ -94,9 +94,14 @@
 - nicht sehr gut
 - so schade
 - nicht gut
-- es geht mir schlecht
-- mir geht es schlecht
-- ich fühle mich nicht so gut
+- [es geht mir schlecht](sad)
+- [mir geht es schlecht](sad)
+- [ich fühle mich nicht so gut](sad)
+- [ich bin traurig](sad)
+- [gestresst](anxious)
+- [angespannt[(anxious)]
+- ich bin [traurig](sad)
+- ich bin [angespannt](anxious)
 
 ## intent:no_problem
 - danke
@@ -153,6 +158,7 @@
 - kilos
 - kilo
 
+<!-- health data intents -->
 ## intent:weight_value
 - ich wiege [66](weight_value)
 - mein gewicht ist [58](weight_value)
@@ -170,3 +176,14 @@
 - [68](weight_value) kilos
 - ich wiege [74](weight_value) kilo
 
+<!-- journal stmts -->
+## intent:reflect_day
+- ich möchte dir von meinem tag erzählen
+- mein Tag war [gut](happy)
+- mein Tag war [nicht gut](sad)
+- kann ich dir von meinem tag erzählen?
+- mein tag
+- können wir über meinen tag reden?
+- heute habe ich viel erlebt
+- tagebuch
+- reflektieren
