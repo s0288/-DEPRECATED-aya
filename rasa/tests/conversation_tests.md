@@ -1,51 +1,28 @@
 #### This file contains tests to evaluate that your bot behaves as expected.
 #### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/user-guide/testing-your-assistant/
 
-## happy path 1
-* greet: hello there!
-  - utter_greet
-* mood_great: amazing
+## start
+* start: /start
+  - utter_start
+* mood_great: gut
   - utter_happy
 
-## happy path 2
-* greet: hello there!
-  - utter_greet
-* mood_great: amazing
-  - utter_happy
-* goodbye: bye-bye!
-  - utter_goodbye
+## fast end 1
+* fast_end: ende
+  - action_fasting_since
+  - slot{"is_fasting" : 1}
+  - utter_ask_end_fast
+* affirm: ja
+  - utter_end_fast
+  - action_end_fast
+  - slot{"is_fasting" : 0}
 
-## sad path 1
-* greet: hello
-  - utter_greet
-* mood_unhappy: not good
-  - utter_cheer_up
-  - utter_did_that_help
-* affirm: yes
-  - utter_happy
-
-## sad path 2
-* greet: hello
-  - utter_greet
-* mood_unhappy: not good
-  - utter_cheer_up
-  - utter_did_that_help
-* deny: not really
-  - utter_goodbye
-
-## sad path 3
-* greet: hi
-  - utter_greet
-* mood_unhappy: very terrible
-  - utter_cheer_up
-  - utter_did_that_help
-* deny: no
-  - utter_goodbye
-
-## say goodbye
-* goodbye: bye-bye!
-  - utter_goodbye
-
-## bot challenge
-* bot_challenge: are you a bot?
-  - utter_iamabot
+## fast start yes
+* fast_start: start
+  - action_fasting_since
+  - slot{"is_fasting" : 0}
+  - utter_ask_fast
+* affirm: jo
+  - utter_start_fast
+  - action_start_fast
+  - slot{"is_fasting" : 1}

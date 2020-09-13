@@ -13,6 +13,7 @@ entities:
 - hours_fasted
 - mins_fasted
 - weight_value
+- fast_length
 
 slots:
   is_fasting:

@@ -1,0 +1,10 @@
+[
+  {
+    "text": "/start",
+    "intent": "start",
+    "intent_prediction": {
+      "name": "fast_start",
+      "confidence": 0.5406190752983093
+    }
+  }
+]

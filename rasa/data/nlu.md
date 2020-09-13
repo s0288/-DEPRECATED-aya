@@ -121,7 +121,8 @@
 
 ## intent:fast_length_so_far
 - wie lange faste ich schon?
-- wann habe ich 16 Stunden geschafft?
+- wann habe ich [16](fast_length) Stunden geschafft?
+- habe ich bald [20](fast_length) Stunden?
 - ist es bald vorbei?
 - faste ich schon?
 - bin ich schon am fasten?
@@ -153,9 +154,9 @@
 - kilo
 
 ## intent:weight_value
-- [66](weight_value)
-- [58](weight_value)
-- [74](weight_value)
+- ich wiege [66](weight_value)
+- mein gewicht ist [58](weight_value)
+- aktuell [74](weight_value)
 - [58](weight_value) kg
 - [84](weight_value) kilo
 - [92](weight_value) kg
