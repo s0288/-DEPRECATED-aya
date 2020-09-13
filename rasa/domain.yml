@@ -68,12 +68,7 @@ intents:
 responses:
   ## conversational stmts
   utter_start:
-    - buttons:
-      - payload: ja
-        title: ja
-      - payload: nein
-        title: nein
-      text: Hey! Ich helfe dir zu fasten. Ich erfasse deine Fastenzeiten. Möchtest du jetzt fasten?  
+    - text: Hey! Ich helfe dir zu fasten und erfasse deine Fastenzeiten. Wenn du bereit bist, schreibe mir einfach, dass du fasten möchtest.
 
   utter_goodbye:
     - text: Ciao

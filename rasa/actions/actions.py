@@ -225,4 +225,4 @@ class ReflectDayForm(FormAction):
     ) -> List[Dict]:
         ''' Define what the form has to do after all required slots are filled '''
 
-        return[]
+        return[SlotSet("reflect_situation", None), SlotSet("reflect_remedy", None)]

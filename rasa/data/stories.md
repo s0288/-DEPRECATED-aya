@@ -28,6 +28,7 @@
 * affirm
   - reflect_day_form
   - form{"reflectsituation": "reflect_day_form"}
+  - action_deactivate_form
   - form{"reflectsituation": null}
   - utter_thank_you
 
@@ -142,6 +143,7 @@
 * reflect_day
   - reflect_day_form
   - form{"reflect_situation": "reflect_day_form"}
+  - action_deactivate_form
   - form{"reflect_situation": null}
   - utter_thank_you
 

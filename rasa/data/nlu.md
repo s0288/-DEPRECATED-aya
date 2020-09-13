@@ -61,31 +61,31 @@
 - ne
 
 ## intent:mood_great
-- [gut](happy)
-- [perfekt](happy)
-- [mir geht es super](happy)
-- [fühle mich super](happy)
-- [mir gehts klasse](happy)
+- gut
+- perfekt
+- mir geht es super
+- fühle mich super
+- mir gehts klasse
 - very good
-- [fühl mich sehr gut](happy)
+- fühl mich sehr gut
 - hervorragend
 - wunderbar
-- [alles prima](happy)
+- alles prima
 - alles paletti
-- [mir geht es sehr gut](happy)
-- [ich fühle mich sehr gut](happy)
+- mir geht es sehr gut
+- ich fühle mich sehr gut
 - großartig
-- [mir geht es gut](happy)
+- mir geht es gut
 - perfect
 - happy
-- [es geht mir gut](happy)
+- es geht mir gut
 
 ## intent:mood_unhappy
 - sad
 - unhappy
-- [traurig](sad)
-- [sehr traurig](sad)
-- [unglücklich](sad)
+- traurig
+- sehr traurig
+- unglücklich
 - bad
 - very bad
 - schlecht
@@ -94,14 +94,14 @@
 - nicht sehr gut
 - so schade
 - nicht gut
-- [es geht mir schlecht](sad)
-- [mir geht es schlecht](sad)
-- [ich fühle mich nicht so gut](sad)
-- [ich bin traurig](sad)
-- [gestresst](anxious)
-- [angespannt[(anxious)]
-- ich bin [traurig](sad)
-- ich bin [angespannt](anxious)
+- es geht mir schlecht
+- mir geht es schlecht
+- ich fühle mich nicht so gut
+- ich bin traurig
+- gestresst
+- angespannt
+- ich bin traurig
+- ich bin angespannt
 
 ## intent:no_problem
 - danke
@@ -179,8 +179,8 @@
 <!-- journal stmts -->
 ## intent:reflect_day
 - ich möchte dir von meinem tag erzählen
-- mein Tag war [gut](happy)
-- mein Tag war [nicht gut](sad)
+- mein Tag war gut
+- mein Tag war nicht gut
 - kann ich dir von meinem tag erzählen?
 - mein tag
 - können wir über meinen tag reden?
