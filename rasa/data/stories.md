@@ -70,9 +70,9 @@
   - slot{"is_fasting" : 0}
   - utter_info_not_fasting_ask_fast
 * affirm
-  - utter_start_fast
   - action_start_fast
   - slot{"is_fasting" : 1}
+  - utter_start_fast
 
 ## fast length without fasting no
 * fast_length_so_far
@@ -90,7 +90,8 @@
 * affirm
   - utter_end_fast
   - action_end_fast
-  - slot{"is_fasting" : 1}
+  - slot{"is_fasting" : 0}
+
   
 ## fast end 2
 * fast_end
@@ -108,7 +109,7 @@
   - utter_ask_weight_value
 * weight_value
   - action_entity_extract
-  - utter_ok
+  - utter_noted  
 
 ## weight add no
 * weight_add
