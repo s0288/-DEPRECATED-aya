@@ -18,11 +18,11 @@
   - slot{"is_fasting" : 0}
 
 ## fast start yes
-* fast_start: start
+* fast_start: fasten
   - action_fasting_since
   - slot{"is_fasting" : 0}
   - utter_ask_fast
-* affirm: jo
+* affirm: ja
   - utter_start_fast
   - action_start_fast
   - slot{"is_fasting" : 1}
