@@ -139,13 +139,21 @@
   - utter_noted  
 
 <!-- journal-specific stories -->
-## reflect day happy path
+## reflect day yes
 * reflect_day
+  - utter_ask_talk
+* affirm
   - reflect_day_form
   - form{"reflect_situation": "reflect_day_form"}
   - action_deactivate_form
   - form{"reflect_situation": null}
   - utter_thank_you
+
+## reflect day no
+* reflect_day
+  - utter_ask_talk
+* deny
+  - utter_ok
 
 <!-- ## reflect day stop but continue
 * reflect_day
