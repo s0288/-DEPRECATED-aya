@@ -158,7 +158,7 @@ class SetReminder16h(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
 
-        date = datetime.datetime.now() + datetime.timedelta(minutes=10) # 16 hours
+        date = datetime.datetime.now() + datetime.timedelta(minutes=15) # 16 hours
         entities = tracker.latest_message.get("entities")
 
         reminder = ReminderScheduled(
