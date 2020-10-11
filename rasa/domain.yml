@@ -3,8 +3,8 @@ actions:
 - action_fasting_since
 - action_hello_world
 - action_start_fast
-- action_set_reminder_16h
-- action_forget_reminder_16h
+- action_set_reminder_fast
+- action_forget_reminder_fast
 - action_entity_extract
 
 entities:
@@ -57,7 +57,7 @@ intents:
 - fast_start
 - fast_length_so_far
 - fast_end
-- 16h_fast_reminder: {triggers: utter_reminder_16h}
+- fast_reminder
 # health data
 - weight_add
 - weight_value
@@ -160,8 +160,8 @@ responses:
   utter_start_fast:
     - text: Ich habe deine Fastenuhr gestartet. Frohes Fasten!
     
-  utter_reminder_16h:
-    - text: Du fastest seit 16 Stunden! :)
+  utter_reminder_fast:
+    - text: Du fastest seit {hours_fasted}! :)
 
   ## health data stmts
   utter_ask_weight:

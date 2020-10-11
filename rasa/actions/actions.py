@@ -20,7 +20,7 @@ import datetime
 #### STARTING AND ENDING A FAST
 
 class ActionStartFast(Action):
-    """ 1) add a new fast to the event_db, 2) create a reminder to tell the user of his success after 16 hours """
+    """ 1) add a new fast to the event_db, 2) create a reminder to tell the user of his success after {hours_fasted} hours """
 
     def name(self) -> Text:
         return "action_start_fast"
@@ -41,7 +41,7 @@ class ActionStartFast(Action):
         # Actions_DB.add_action(name, created_at, platform_user_id, platform_name, value, received_at)
 
         # set slots and schedule a reminder
-        return [SlotSet("is_fasting", 1), SlotSet("start_fast", created_at), FollowupAction("action_set_reminder_16h")]
+        return [SlotSet("is_fasting", 1), SlotSet("start_fast", created_at), FollowupAction("action_set_reminder_fast")]
 
 class ActionFastingSince(Action):
     """ calculate the time since the start of the fast """
@@ -115,7 +115,7 @@ class ActionEndFast(Action):
         received_at = created_at
         # Actions_DB.add_action(name, created_at, platform_user_id, platform_name, value, received_at)
 
-        return [SlotSet("is_fasting", 0), SlotSet("start_fast", None), SlotSet("hours_fasted", "0 Stunden"), SlotSet("mins_fasted", "0 Minuten"), FollowupAction("action_forget_reminder_16h")]
+        return [SlotSet("is_fasting", 0), SlotSet("start_fast", None), SlotSet("hours_fasted", "0 Stunden"), SlotSet("mins_fasted", "0 Minuten"), FollowupAction("action_forget_reminder_fast")]
 
 
 #### EXTRACT DATA
@@ -145,11 +145,11 @@ class ActionEntityExtract(Action):
 
 #### REMINDERS
 
-class SetReminder16h(Action):
-    """ Creates a reminder to tell the user he fasted 16 hours already """
+class SetReminderFast(Action):
+    """ Creates a reminder to tell the user he fasted {hours_fasted} hours already """
 
     def name(self) -> Text:
-        return "action_set_reminder_16h"
+        return "action_set_reminder_fast"
 
     async def run(
         self,
@@ -158,14 +158,14 @@ class SetReminder16h(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
 
-        date = datetime.datetime.now() + datetime.timedelta(hours=16) # 16 hours
+        date = datetime.datetime.now() + datetime.timedelta(seconds=10) # 16 hours
         entities = tracker.latest_message.get("entities")
 
         reminder = ReminderScheduled(
-            "16h_fast_reminder",
+            "fast_reminder",
             trigger_date_time=date,
             entities=entities,
-            name="16h_fast_reminder",
+            name="fast_reminder",
             kill_on_user_message=False,
         )
 
@@ -174,11 +174,11 @@ class SetReminder16h(Action):
         return [reminder]            
 
 
-class ForgetReminder16h(Action):
-    """Cancels 16h fasting reminder."""
+class ForgetReminderFast(Action):
+    """Cancels fasting reminder."""
 
     def name(self) -> Text:
-        return "action_forget_reminder_16h"
+        return "action_forget_reminder_fast"
 
     def run(
         self, dispatcher, tracker: Tracker, domain: Dict[Text, Any]
@@ -188,7 +188,7 @@ class ForgetReminder16h(Action):
         print("removing reminder")
 
         # Cancel all reminders
-        return [ReminderCancelled(name="16h_fast_reminder")]
+        return [ReminderCancelled(name="fast_reminder")]
 
 
 ### journalling

@@ -108,7 +108,6 @@
   - action_end_fast
   - slot{"is_fasting" : 0}
 
-  
 ## fast end 2
 * fast_end
   - action_fasting_since
@@ -116,6 +115,11 @@
   - utter_ask_end_fast
 * deny
   - utter_ok
+
+## fast reminder
+* fast_reminder
+  - action_fasting_since
+  - utter_reminder_fast
 
 <!-- health-data-specific stories -->
 ## weight add yes
