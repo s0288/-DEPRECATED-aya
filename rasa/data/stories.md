@@ -24,13 +24,6 @@
   - utter_greet
 * mood_unhappy
   - utter_express_empathy
-  - utter_ask_talk
-* affirm
-  - reflect_day_form
-  - form{"reflectsituation": "reflect_day_form"}
-  - action_deactivate_form
-  - form{"reflectsituation": null}
-  - utter_thank_you
 
 ## sad path no
 * greet
@@ -141,34 +134,3 @@
 * weight_value
   - action_entity_extract
   - utter_noted  
-
-<!-- journal-specific stories -->
-## reflect day yes
-* reflect_day
-  - utter_ask_talk
-* affirm
-  - reflect_day_form
-  - form{"reflect_situation": "reflect_day_form"}
-  - action_deactivate_form
-  - form{"reflect_situation": null}
-  - utter_thank_you
-
-## reflect day no
-* reflect_day
-  - utter_ask_talk
-* deny
-  - utter_ok
-
-<!-- ## reflect day stop but continue
-* reflect_day
-  - reflect_day_form
-  - form{"reflect_situation": "reflect_day_form"}
-  - form{"reflect_situation": null}
-  - utter_thank_you -->
-
-<!-- ## reflect day stop
-* reflect_day
-  - reflect_day_form
-  - form{"reflect_situation": "reflect_day_form"}
-  - form{"reflect_situation": null}
-  - utter_thank_you -->
