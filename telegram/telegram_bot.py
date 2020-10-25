@@ -12,27 +12,12 @@ import datetime
 import urllib
 import logging
 
-# from db_bot import Telegram_DB 
-import src.db_telegram_bot
 import src.call_webhook
 
-Telegram_DB = src.db_telegram_bot.Telegram_DB()
 
 URL = f"https://api.telegram.org/bot{os.environ.get('TELEGRAM_TOKEN')}/"
 
 class Telegram_Bot:
-# ------ save message to db
-    # key function to save to database
-    def save_message(message_elements):
-        # set time when message was saved to db
-        message_elements['received_at'] = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-        # save message to db
-        try:
-            Telegram_DB.add_message(message_elements['message_id'], message_elements['created_at'], message_elements['message'], message_elements['user_id'], message_elements['chat_id'], message_elements['chat_type'], message_elements['bot_command'], message_elements['received_at'])
-        except Exception as e:
-            logging.exception(e)
-
 # ------ process incoming messages
     def get_json_from_url(url):
         response = requests.get(url)
@@ -77,9 +62,6 @@ class Telegram_Bot:
                     message_elements = Telegram_Bot.extract_message(message_elements, update['message'])
                 elif extraction_method == 'extract_callback':
                     message_elements = Telegram_Bot.extract_callback(message_elements, update['callback_query'])
-                
-                # save user message to db
-                Telegram_Bot.save_message(message_elements)
 
                 # return chat_id and message for handling a reply
                 return message_elements["chat_id"], message_elements["message"]
@@ -178,5 +160,4 @@ class Telegram_Bot:
         # send message and save response
         url_response = Telegram_Bot.get_json_from_url(url)
         send_elements = Telegram_Bot.extract_message(send_elements, url_response["result"])
-        Telegram_Bot.save_message(send_elements)
 # ------ end: send messages
