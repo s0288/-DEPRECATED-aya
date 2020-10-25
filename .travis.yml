@@ -3,15 +3,8 @@ sudo: required
 services:
     - docker
 
-# before_install:
-#     - docker build -t s0288/telegram-test -f ./tests/Dockerfile.telegram .
-#     - ...
-
-# script:
-#     - docker run s0288/telegram-test -- --coverage
-
 after_success:
-    - docker build -t s0288/telegram:latest .
+    - docker build -t s0288/telegram:latest -f Dockerfile.telegram .
     - docker build -t s2088/flask:latest -f Dockerfile.flask .
     # Log in to Docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
