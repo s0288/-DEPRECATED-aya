@@ -1,0 +1,12 @@
+FROM python:3.7-slim
+
+WORKDIR '/app'
+
+# install dependencies
+COPY requirements_cron.txt .
+RUN pip install -r requirements_cron.txt
+
+# mount relevant directories
+COPY ./cron .
+
+CMD python is_active.py

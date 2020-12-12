@@ -46,6 +46,13 @@ services:
             - start
             - --actions
             - actions
+    cron:
+        image: s0288/cron
+        environment:
+            - ROOT_USER=${ROOT_USER}
+            - FLASK_URL=${FLASK_URL}
+        networks:
+            - aya
 
 networks:
     aya:
