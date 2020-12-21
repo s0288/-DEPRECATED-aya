@@ -42,8 +42,9 @@ slots:
     type: any
   weight_value:
     type: any
-  requested_slot:
-    type: any
+  total_hours_fasted:
+    type: float
+    influence_conversation: false
 responses:
   utter_start:
   - text: Hey! Ich helfe dir zu fasten und erfasse deine Fastenzeiten. Wenn du bereit bist, schreibe mir einfach, dass du fasten möchtest.
