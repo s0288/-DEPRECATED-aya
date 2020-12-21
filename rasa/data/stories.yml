@@ -125,6 +125,7 @@ stories:
   - intent: fast_reminder
   - action: action_fasting_since
   - action: utter_reminder_fast
+  - action: action_set_reminder_fast
 - story: weight add yes
   steps:
   - intent: weight_add
