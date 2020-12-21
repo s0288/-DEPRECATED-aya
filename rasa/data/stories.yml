@@ -20,21 +20,12 @@ stories:
   - action: utter_greet
   - intent: mood_great
   - action: utter_happy
-- story: sad path yes
+- story: sad path
   steps:
   - intent: greet
   - action: utter_greet
   - intent: mood_unhappy
   - action: utter_express_empathy
-- story: sad path no
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_express_empathy
-  - action: utter_ask_talk
-  - intent: deny
-  - action: utter_ok
 - story: say no problem
   steps:
   - intent: no_problem
