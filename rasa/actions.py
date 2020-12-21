@@ -92,11 +92,11 @@ class ActionEndFast(Action):
                 domain: Dict[Text, Any],
             ) -> List[Dict[Text, Any]]:
 
-        ## add end_fast to event_db
-        created_at = datetime.datetime.now()
-        created_at = created_at.strftime('%Y-%m-%d %H:%M:%S')
+        start_fast = datetime.datetime.strptime(str(tracker.get_slot('start_fast')), '%Y-%m-%d %H:%M:%S')
+        hours_fasted, mins_fasted = _calc_fasting_since(start_fast)
+        total_hours_fasted = hours_fasted + mins_fasted/60
 
-        return [SlotSet("is_fasting", 0), SlotSet("start_fast", None), SlotSet("hours_fasted", "0 Stunden"), SlotSet("mins_fasted", "0 Minuten"), FollowupAction("action_forget_reminder_fast")]
+        return [SlotSet("total_hours_fasted", total_hours_fasted), SlotSet("is_fasting", 0), SlotSet("start_fast", None), SlotSet("hours_fasted", "0 Stunden"), SlotSet("mins_fasted", "0 Minuten"), FollowupAction("action_forget_reminder_fast")]
 
 
 #### EXTRACT DATA
