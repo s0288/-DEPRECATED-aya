@@ -17,12 +17,13 @@ services:
         ports:
             - "5000:5000"
     rasa:
-        image: rasa/rasa:1.10.3-full
+        image: rasa/rasa:2.2.1-full
         environment:
             - AYA_TRACKER_DB_HOST=${AYA_TRACKER_DB_HOST}
             - AYA_TRACKER_DB_DB=${AYA_TRACKER_DB_DB}
             - AYA_TRACKER_DB_USER=${AYA_TRACKER_DB_USER}
             - AYA_TRACKER_DB_PW=${AYA_TRACKER_DB_PW}
+            - AYA_TRACKER_DB_PORT=${AYA_TRACKER_DB_PORT}
         networks:
             - aya
         ports:
@@ -31,21 +32,17 @@ services:
             - ./rasa:/app
         command: 
             - run
-            - -vv
+            - -v
         depends_on:
             - actions
     actions:
-        image: rasa/rasa-sdk:1.10.1
+        image: rasa/rasa-sdk:2.2.0
         networks:
             - aya
         ports:
             - "5055:5055"
         volumes:
-            - ./rasa/actions:/app/actions
-        command:
-            - start
-            - --actions
-            - actions
+            - ./rasa:/app/actions
     cron:
         image: s0288/cron
         environment:

@@ -1,0 +1,147 @@
+version: "2.0"
+stories:
+- story: start
+  steps:
+  - intent: start
+  - action: utter_start
+  - intent: mood_great
+  - action: utter_happy
+- story: how are you
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: how_are_you
+  - action: utter_I_am_fine
+  - intent: affirm
+  - action: utter_ok
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+- story: sad path yes
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_express_empathy
+- story: sad path no
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_express_empathy
+  - action: utter_ask_talk
+  - intent: deny
+  - action: utter_ok
+- story: say no problem
+  steps:
+  - intent: no_problem
+  - action: utter_no_problem
+- story: say goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+- story: fast start yes
+  steps:
+  - intent: fast_start
+  - action: action_fasting_since
+  - slot_was_set:
+    - is_fasting: 0
+  - action: utter_ask_fast
+  - intent: affirm
+  - action: utter_start_fast
+  - action: action_start_fast
+  - slot_was_set:
+    - is_fasting: 1
+- story: fast start no
+  steps:
+  - intent: fast_start
+  - action: action_fasting_since
+  - slot_was_set:
+    - is_fasting: 0
+  - action: utter_ask_fast
+  - intent: deny
+  - action: utter_ok
+- story: fast start while fasting
+  steps:
+  - intent: fast_start
+  - action: action_fasting_since
+  - slot_was_set:
+    - is_fasting: 1
+  - action: utter_info_fast
+- story: fast length while fasting
+  steps:
+  - intent: fast_length_so_far
+  - action: action_fasting_since
+  - slot_was_set:
+    - is_fasting: 1
+  - action: utter_info_fast
+- story: fast length without fasting yes
+  steps:
+  - intent: fast_length_so_far
+  - action: action_fasting_since
+  - slot_was_set:
+    - is_fasting: 0
+  - action: utter_info_not_fasting_ask_fast
+  - intent: affirm
+  - action: action_start_fast
+  - slot_was_set:
+    - is_fasting: 1
+  - action: utter_start_fast
+- story: fast length without fasting no
+  steps:
+  - intent: fast_length_so_far
+  - action: action_fasting_since
+  - slot_was_set:
+    - is_fasting: 0
+  - action: utter_info_not_fasting_ask_fast
+  - intent: deny
+  - action: utter_ok
+- story: fast end 1
+  steps:
+  - intent: fast_end
+  - action: action_fasting_since
+  - slot_was_set:
+    - is_fasting: 1
+  - action: utter_ask_end_fast
+  - intent: affirm
+  - action: utter_end_fast
+  - action: action_end_fast
+  - slot_was_set:
+    - is_fasting: 0
+- story: fast end 2
+  steps:
+  - intent: fast_end
+  - action: action_fasting_since
+  - slot_was_set:
+    - is_fasting: 1
+  - action: utter_ask_end_fast
+  - intent: deny
+  - action: utter_ok
+- story: fast reminder
+  steps:
+  - intent: fast_reminder
+  - action: action_fasting_since
+  - action: utter_reminder_fast
+- story: weight add yes
+  steps:
+  - intent: weight_add
+  - action: utter_ask_weight
+  - intent: affirm
+  - action: utter_ask_weight_value
+  - intent: weight_value
+  - action: action_entity_extract
+  - action: utter_noted
+- story: weight add no
+  steps:
+  - intent: weight_add
+  - action: utter_ask_weight
+  - intent: deny
+  - action: utter_ok
+- story: weight value
+  steps:
+  - intent: weight_value
+  - action: action_entity_extract
+  - action: utter_noted
