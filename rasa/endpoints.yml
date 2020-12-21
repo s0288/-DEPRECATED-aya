@@ -22,7 +22,7 @@ tracker_store:
    type: SQL
    dialect: "postgresql"
    url: ${AYA_TRACKER_DB_HOST}
-   port: '25060'
+   port: ${AYA_TRACKER_DB_PORT}
    db: ${AYA_TRACKER_DB_DB}
    username: ${AYA_TRACKER_DB_USER}
    password: ${AYA_TRACKER_DB_PW}
