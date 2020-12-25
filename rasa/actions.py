@@ -11,9 +11,46 @@ from rasa_sdk.events import SlotSet, ReminderScheduled, ReminderCancelled, Follo
 from rasa_sdk.executor import CollectingDispatcher
 
 import datetime 
+# from sqlalchemy import create_engine
+# engine = create_engine(f"postgres://{os.environ.get('AYA_TRACKER_DB_USER')}:{os.environ.get('AYA_TRACKER_DB_PW')}@{os.environ.get('AYA_TRACKER_DB_HOST')}:{os.environ.get('AYA_TRACKER_DB_PORT')}/{os.environ.get('AYA_TRACKER_DB_DB')}")
+
+#### helper funcs
+def _calc_fasting_since(start_fast):
+    '''
+        Subtract the start_fast (a timestamp) from the current time.
+        Parameters:
+            start_fast: timestamp
+        Returns:
+            hours_fasted: integer
+            mins_fasted: integer
+    '''
+    created_at = datetime.datetime.now()
+    time_fasted = created_at - start_fast
+    seconds_fasted = time_fasted.seconds + time_fasted.days*24*60*60
+    hours_fasted = seconds_fasted//3600 # round to nearest integer
+    mins_fasted = (seconds_fasted%3600)//60 # get remainder in mins
+    return hours_fasted, mins_fasted
+
+def _retrieve_fasting_log(sender_id):
+    with engine.connect() as con:
+        data = pd.read_sql_query(f"""
+            select 
+                id, sender_id, timestamp, action_name, data::json ->> 'value' as total_hours_fasted
+            from events 
+            where action_name = 'total_hours_fasted' and sender_id = {sender_id}
+            order by id desc 
+            """, con)
+    data["created_at"] = pd.to_datetime(data.timestamp, unit='s')
+    diff_1w = datetime.datetime.now() - pd.tseries.offsets.Week() # only keep values from last week
+
+    sub_data = data[data.created_at > diff_1w].total_hours_fasted.astype(float)
+    total_fasted_7d = sub_data.sum()
+    avg_fasted_7d = sub_data.mean()
+    max_fasted_7d = sub_data.max()
+
+    return total_fasted_7d, avg_fasted_7d, max_fasted_7d
 
 #### STARTING AND ENDING A FAST
-
 class ActionStartFast(Action):
     """ 1) add a new fast to the event_db, 2) create a reminder to tell the user of his success after {hours_fasted} hours """
 
@@ -31,24 +68,6 @@ class ActionStartFast(Action):
         # set slots and schedule a reminder
         return [SlotSet("is_fasting", 1), SlotSet("start_fast", created_at), FollowupAction("action_set_reminder_fast")]
 
-
-def _calc_fasting_since(start_fast):
-    '''
-        Subtract the start_fast (a timestamp) from the current time.
-        Parameters:
-            start_fast: timestamp
-        Returns:
-            hours_fasted: integer
-            mins_fasted: integer
-    '''
-    created_at = datetime.datetime.now()
-    time_fasted = created_at - start_fast
-    seconds_fasted = time_fasted.seconds + time_fasted.days*24*60*60
-    hours_fasted = seconds_fasted//3600 # round to nearest integer
-    mins_fasted = (seconds_fasted%3600)//60 # get remainder in mins
-    return hours_fasted, mins_fasted
-
-
 class ActionFastingSince(Action):
     """ calculate the time since the start of the fast """
 
@@ -65,7 +84,7 @@ class ActionFastingSince(Action):
         ## check if user is currently fasting
         start_fast = tracker.get_slot('start_fast')
         
-        if start_fast is None: # if user is currently not fasting, set slots to None
+        if start_fast is None or start_fast == "None": # if user is currently not fasting, set slots to None
             is_fasting = 0 # set is_fasting to 0 since the user is not fasting
             mins_str = '0 Minuten'
             hours_str = '0 Stunden'
@@ -98,6 +117,23 @@ class ActionEndFast(Action):
 
         return [SlotSet("total_hours_fasted", total_hours_fasted), SlotSet("is_fasting", 0), SlotSet("start_fast", None), SlotSet("hours_fasted", "0 Stunden"), SlotSet("mins_fasted", "0 Minuten"), FollowupAction("action_forget_reminder_fast")]
 
+
+#### Fasting log
+class ActionSendFastingLog(Action):
+    """ send fasting log """
+
+    def name(self) -> Text:
+        return "action_send_fasting_log"
+
+    def run(self, 
+                dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any],
+            ) -> List[Dict[Text, Any]]:
+        
+        # total_fasted_7d, avg_fasted_7d, max_fasted_7d = _retrieve_fasting_log(tracker.sender_id)
+
+        dispatcher.utter_message(text = "Hier ist deine Fastenübersicht.")
 
 #### EXTRACT DATA
 class ActionEntityExtract(Action):

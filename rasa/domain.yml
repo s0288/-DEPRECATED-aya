@@ -16,6 +16,7 @@ intents:
 - fast_length_so_far
 - fast_end
 - fast_reminder
+- fast_log
 - weight_add
 - weight_value
 entities:
@@ -152,4 +153,5 @@ actions:
 - action_start_fast
 - action_set_reminder_fast
 - action_forget_reminder_fast
+- action_send_fasting_log
 - action_entity_extract
