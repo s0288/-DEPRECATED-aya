@@ -12,8 +12,24 @@ from rasa_sdk.executor import CollectingDispatcher
 
 import datetime 
 
-#### STARTING AND ENDING A FAST
+#### helper funcs
+def _calc_fasting_since(start_fast):
+    '''
+        Subtract the start_fast (a timestamp) from the current time.
+        Parameters:
+            start_fast: timestamp
+        Returns:
+            hours_fasted: integer
+            mins_fasted: integer
+    '''
+    created_at = datetime.datetime.now()
+    time_fasted = created_at - start_fast
+    seconds_fasted = time_fasted.seconds + time_fasted.days*24*60*60
+    hours_fasted = seconds_fasted//3600 # round to nearest integer
+    mins_fasted = (seconds_fasted%3600)//60 # get remainder in mins
+    return hours_fasted, mins_fasted
 
+#### STARTING AND ENDING A FAST
 class ActionStartFast(Action):
     """ 1) add a new fast to the event_db, 2) create a reminder to tell the user of his success after {hours_fasted} hours """
 
@@ -31,24 +47,6 @@ class ActionStartFast(Action):
         # set slots and schedule a reminder
         return [SlotSet("is_fasting", 1), SlotSet("start_fast", created_at), FollowupAction("action_set_reminder_fast")]
 
-
-def _calc_fasting_since(start_fast):
-    '''
-        Subtract the start_fast (a timestamp) from the current time.
-        Parameters:
-            start_fast: timestamp
-        Returns:
-            hours_fasted: integer
-            mins_fasted: integer
-    '''
-    created_at = datetime.datetime.now()
-    time_fasted = created_at - start_fast
-    seconds_fasted = time_fasted.seconds + time_fasted.days*24*60*60
-    hours_fasted = seconds_fasted//3600 # round to nearest integer
-    mins_fasted = (seconds_fasted%3600)//60 # get remainder in mins
-    return hours_fasted, mins_fasted
-
-
 class ActionFastingSince(Action):
     """ calculate the time since the start of the fast """
 
@@ -65,7 +63,7 @@ class ActionFastingSince(Action):
         ## check if user is currently fasting
         start_fast = tracker.get_slot('start_fast')
         
-        if start_fast is None: # if user is currently not fasting, set slots to None
+        if start_fast is None or start_fast == "None": # if user is currently not fasting, set slots to None
             is_fasting = 0 # set is_fasting to 0 since the user is not fasting
             mins_str = '0 Minuten'
             hours_str = '0 Stunden'
@@ -98,6 +96,39 @@ class ActionEndFast(Action):
 
         return [SlotSet("total_hours_fasted", total_hours_fasted), SlotSet("is_fasting", 0), SlotSet("start_fast", None), SlotSet("hours_fasted", "0 Stunden"), SlotSet("mins_fasted", "0 Minuten"), FollowupAction("action_forget_reminder_fast")]
 
+
+#### Fasting log
+class ActionSendFastingLog(Action):
+    """ send fasting log """
+
+    def name(self) -> Text:
+        return "action_send_fasting_log"
+
+    def run(self, 
+                dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any],
+            ) -> List[Dict[Text, Any]]:
+        
+        
+        total_fasted_7d, avg_fasted_7d, max_fasted_7d = ActionSendFastingLog.retrieve_fasting_log(tracker.events)
+        dispatcher.utter_message(text = f"Hier ist deine Übersicht der letzten 7 Tage:\n  - du hast {total_fasted_7d:,.2f} Stunden gefastet\n  - durchschn. hast du {avg_fasted_7d:,.2f} Stunden gefastet\n  - dein längstes Fasten war {max_fasted_7d:,.2f} Stunden")
+
+    @staticmethod
+    def retrieve_fasting_log(events):
+        '''
+            get summary stats for fasting_log (fasting_log window = 1 week)
+        '''
+        days_to_subtract = 7
+        earliest_day = datetime.datetime.now().date() -  datetime.timedelta(days=days_to_subtract)
+        fasting_log = [event["value"] for event in events if event["event"] == "slot" if event["name"] == "total_hours_fasted" and datetime.datetime.fromtimestamp(event["timestamp"]).date() > earliest_day]
+        if len(fasting_log) > 0: # if no fast has been finished so far, there is no relevant event 
+            total_fasted_7d = sum(fasting_log)
+            avg_fasted_7d = sum(fasting_log) / len(fasting_log)
+            max_fasted_7d = max(fasting_log)
+            return total_fasted_7d, avg_fasted_7d, max_fasted_7d
+        else:
+            return 0, 0, 0
 
 #### EXTRACT DATA
 class ActionEntityExtract(Action):
