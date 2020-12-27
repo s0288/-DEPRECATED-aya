@@ -32,7 +32,7 @@ services:
             - ./rasa:/app
         command: 
             - run
-            - -vv
+            - -v
         depends_on:
             - actions
     actions:

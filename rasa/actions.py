@@ -11,8 +11,6 @@ from rasa_sdk.events import SlotSet, ReminderScheduled, ReminderCancelled, Follo
 from rasa_sdk.executor import CollectingDispatcher
 
 import datetime 
-# from sqlalchemy import create_engine
-# engine = create_engine(f"postgres://{os.environ.get('AYA_TRACKER_DB_USER')}:{os.environ.get('AYA_TRACKER_DB_PW')}@{os.environ.get('AYA_TRACKER_DB_HOST')}:{os.environ.get('AYA_TRACKER_DB_PORT')}/{os.environ.get('AYA_TRACKER_DB_DB')}")
 
 #### helper funcs
 def _calc_fasting_since(start_fast):
@@ -30,25 +28,6 @@ def _calc_fasting_since(start_fast):
     hours_fasted = seconds_fasted//3600 # round to nearest integer
     mins_fasted = (seconds_fasted%3600)//60 # get remainder in mins
     return hours_fasted, mins_fasted
-
-def _retrieve_fasting_log(sender_id):
-    with engine.connect() as con:
-        data = pd.read_sql_query(f"""
-            select 
-                id, sender_id, timestamp, action_name, data::json ->> 'value' as total_hours_fasted
-            from events 
-            where action_name = 'total_hours_fasted' and sender_id = {sender_id}
-            order by id desc 
-            """, con)
-    data["created_at"] = pd.to_datetime(data.timestamp, unit='s')
-    diff_1w = datetime.datetime.now() - pd.tseries.offsets.Week() # only keep values from last week
-
-    sub_data = data[data.created_at > diff_1w].total_hours_fasted.astype(float)
-    total_fasted_7d = sub_data.sum()
-    avg_fasted_7d = sub_data.mean()
-    max_fasted_7d = sub_data.max()
-
-    return total_fasted_7d, avg_fasted_7d, max_fasted_7d
 
 #### STARTING AND ENDING A FAST
 class ActionStartFast(Action):
@@ -131,9 +110,25 @@ class ActionSendFastingLog(Action):
                 domain: Dict[Text, Any],
             ) -> List[Dict[Text, Any]]:
         
-        # total_fasted_7d, avg_fasted_7d, max_fasted_7d = _retrieve_fasting_log(tracker.sender_id)
+        
+        total_fasted_7d, avg_fasted_7d, max_fasted_7d = ActionSendFastingLog.retrieve_fasting_log(tracker.events)
+        dispatcher.utter_message(text = f"Hier ist deine Übersicht der letzten 7 Tage:\n  - du hast {total_fasted_7d:,.2f} Stunden gefastet\n  - durchschn. hast du {avg_fasted_7d:,.2f} Stunden gefastet\n  - dein längstes Fasten war {max_fasted_7d:,.2f} Stunden")
 
-        dispatcher.utter_message(text = "Hier ist deine Fastenübersicht.")
+    @staticmethod
+    def retrieve_fasting_log(events):
+        '''
+            get summary stats for fasting_log (fasting_log window = 1 week)
+        '''
+        days_to_subtract = 7
+        earliest_day = datetime.datetime.now().date() -  datetime.timedelta(days=days_to_subtract)
+        fasting_log = [event["value"] for event in events if event["event"] == "slot" if event["name"] == "total_hours_fasted" and datetime.datetime.fromtimestamp(event["timestamp"]).date() > earliest_day]
+        if len(fasting_log) > 0: # if no fast has been finished so far, there is no relevant event 
+            total_fasted_7d = sum(fasting_log)
+            avg_fasted_7d = sum(fasting_log) / len(fasting_log)
+            max_fasted_7d = max(fasting_log)
+            return total_fasted_7d, avg_fasted_7d, max_fasted_7d
+        else:
+            return 0, 0, 0
 
 #### EXTRACT DATA
 class ActionEntityExtract(Action):
