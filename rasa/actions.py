@@ -133,6 +133,8 @@ class ActionSendFastingLog(Action):
                     consecutive_cnt += 1
                 else:
                     consecutive_cnt = 0
+            if datetime.datetime.now().toordinal() - max(max(consecutive_list))>1: # if the user has not started a fast today or yesterday, set to 0
+                consecutive_cnt = 0
     
             # stats for relevant period
             start_of_period = datetime.datetime.now().date() -  datetime.timedelta(days=days_to_subtract)
