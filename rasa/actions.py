@@ -128,7 +128,7 @@ class ActionSendFastingLog(Action):
         if len(fasting_log) > 0: # if no fast has been finished so far, there is no relevant event 
             consecutive_list = [(log["date_end"].toordinal(), log["date_start"].toordinal()) for log in fasting_log]
             consecutive_cnt = 0
-            for (first_event, second_event) in zip(consecutive_list[::-1], consecutive_list[1::-1]): # compare two adjacent fasting events: did one start at the end of the other? Important: reverse the list because the tracker shows the most recent value first
+            for (first_event, second_event) in zip(consecutive_list, consecutive_list[1:]): # compare two adjacent fasting events: did one start at the end of the other? Important: reverse the list because the tracker shows the most recent value first
                 if max(first_event) == min(second_event):
                     consecutive_cnt += 1
                 else:
