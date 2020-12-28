@@ -62,3 +62,4 @@ diff_1w = datetime.datetime.now() - pd.tseries.offsets.Week()
 total_fasted_7d, avg_fasted_7d, max_fasted_7d = get_fasting_log(data[(data.created_at > diff_1w) & (data.sender_id==ROOT_USER)])
 
 print(f"Hier ist deine Übersicht der letzten 7 Tage:\n    - du hast insgesamt {total_fasted_7d:,.2f} Stunden gefastet\n    - du hast durchschn. {avg_fasted_7d:,.2f} Stunden gefastet\n    - deine längste Fastendauer betrug {max_fasted_7d:,.2f} Stunden")
+
