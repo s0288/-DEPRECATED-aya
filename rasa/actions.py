@@ -47,6 +47,54 @@ class ActionStartFast(Action):
         # set slots and schedule a reminder
         return [SlotSet("is_fasting", 1), SlotSet("start_fast", created_at), FollowupAction("action_set_reminder_fast")]
 
+class ValidateEditFastStartForm(Action):
+    """ Request required slots for editing the start of a fast """
+
+    def name(self) -> Text:
+        return "edit_fast_start_form"
+
+    def run(self, 
+                dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any],
+            ) -> List[Dict[Text, Any]]:
+
+        required_slots = ['fast_start_time']
+        for slot_name in required_slots:
+            if tracker.slots.get(slot_name) is None:
+                # The slot is not filled yet. Request the user to fill this slot next.
+                return [SlotSet("requested_slot", slot_name)]
+
+        # All slots are filled
+        return [SlotSet("requested_slot", None)]
+
+
+class ActionSubmitEditFastStartForm(Action):
+    """ 1) Let the user change the start date, 2) remove the existing reminder, 3) add a new reminder """
+
+    def name(self) -> Text:
+        return "action_submit_edit_fast_start_form"
+
+    def run(self, 
+                dispatcher: CollectingDispatcher,
+                tracker: Tracker,
+                domain: Dict[Text, Any],
+            ) -> List[Dict[Text, Any]]:
+
+        ## retrieve value of fast_start_time slot
+        fast_start_time = tracker.get_slot('fast_start_time')
+        fast_start_hour, fast_start_min = [int(row) for row in fast_start_time.split(':')]
+
+        d = datetime.datetime.now()
+        new_fast_start = str(datetime.datetime(d.year, d.month, d.day, fast_start_hour, fast_start_min))
+
+        dispatcher.utter_message(text = f"Ok. Ich habe deinen Fastenstart auf {new_fast_start} geändert.")
+
+        # set slots and schedule a reminder
+        return [SlotSet("is_fasting", 1), SlotSet("start_fast", new_fast_start), SlotSet("fast_start_time", None), ReminderCancelled(name="fast_reminder"), FollowupAction("action_set_reminder_fast")]
+
+
+
 class ActionFastingSince(Action):
     """ calculate the time since the start of the fast """
 

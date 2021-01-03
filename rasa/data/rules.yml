@@ -1,0 +1,30 @@
+version: "2.0"
+
+rules:
+  - rule: Activate edit fast start form - is_fasting 1
+    steps:
+    - intent: request_edit_fast_start
+    - action: action_fasting_since
+    - slot_was_set:
+      - is_fasting: 1
+    - action: edit_fast_start_form
+    - active_loop: edit_fast_start_form
+  - rule: Activate edit fast start form - is_fasting 0
+    steps:
+    - intent: request_edit_fast_start
+    - action: action_fasting_since
+    - slot_was_set:
+      - is_fasting: 0
+    - action: utter_info_not_fasting_ask_fast
+  - rule: Submit edit fast start form
+    condition:
+    # Condition that form is active.
+    - active_loop: edit_fast_start_form
+    steps:
+    # Form is deactivated
+    - action: edit_fast_start_form
+    - active_loop: null
+    - slot_was_set:
+      - requested_slot: null
+    # The actions we want to run when the form is submitted.
+    - action: action_submit_edit_fast_start_form

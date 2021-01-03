@@ -19,6 +19,7 @@ intents:
 - fast_log
 - weight_add
 - weight_value
+- request_edit_fast_start
 entities:
 - is_fasting
 - start_fast
@@ -26,6 +27,7 @@ entities:
 - mins_fasted
 - weight_value
 - fast_length
+- fast_start_time
 slots:
   is_fasting:
     type: categorical
@@ -46,6 +48,9 @@ slots:
   total_hours_fasted:
     type: float
     influence_conversation: false
+  fast_start_time:
+    type: any
+    initial_value: None
 responses:
   utter_start:
   - text: Hey! Ich helfe dir zu fasten und erfasse deine Fastenzeiten. Wenn du bereit bist, schreibe mir einfach, dass du fasten möchtest.
@@ -132,20 +137,8 @@ responses:
     text: Möchtest du dein Gewicht eintragen?
   utter_ask_weight_value:
   - text: Wie viel hast du gewogen?
-  utter_ask_talk:
-  - buttons:
-    - payload: ja
-      title: ja
-    - payload: nein
-      title: nein
-    text: Möchtest du beschreiben, was dich beschäftigt?
-  utter_ask_feelings:
-  - text: Was beschäftigt dich?
-  - text: Was geht dir durch den Kopf?
-  utter_ask_countermeasures:
-  - text: Wie möchtest du mit deiner Situation umgehen?
-  - text: Siehst du eine Möglichkeit, deine Situation zu verändern?
-  - text: Gibt es etwas, das du tun könntest, um dich wohler zu fühlen?
+  utter_ask_edit_fast_start_form_ask_fast_start_time:
+  - text: Wann hast du das Fasten begonnen? Schreibe die Uhrzeit im Format hh:mm, bspw. "12:45 Uhr"
 actions:
 - action_end_fast
 - action_fasting_since
@@ -155,3 +148,9 @@ actions:
 - action_forget_reminder_fast
 - action_send_fasting_log
 - action_entity_extract
+- action_submit_edit_fast_start_form
+forms:
+  edit_fast_start_form:
+    fast_start_time:
+      - type: from_entity
+        entity: time

@@ -185,3 +185,18 @@ nlu:
     - [99](weight_value) kilo
     - [68](weight_value) kilos
     - ich wiege [74](weight_value) kilo
+- intent: request_edit_fast_start
+  examples: |
+    - fastenstart ändern
+    - ich möchte den fastenstart verändern
+    - ich habe schon früher begonnen zu fasten
+    - ich faste schon länger
+    - ich habe schon angefangen
+    - fasten ändern
+    - fastenzeit ändern
+    - fastenstart verstellen
+    - ich habe schon früher begonnen
+    - ich habe um [12:45](fast_start_time) Uhr begonnen zu fasten
+    - um [13:11](fast_start_time) habe ich angefangen zu fasten
+    - ich faste schon seit [17:43](fast_start_time)
+    - ich will das fasten ändern. Ich faste schon seit [8:17](fast_start_time)
