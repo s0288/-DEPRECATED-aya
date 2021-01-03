@@ -110,27 +110,30 @@ class ActionSendFastingLog(Action):
                 domain: Dict[Text, Any],
             ) -> List[Dict[Text, Any]]:
         
-        consecutive_cnt, total_fasted_7d, avg_fasted_7d, max_fasted_7d = ActionSendFastingLog.retrieve_fasting_log(tracker.events)
+        consecutive_cnt, max_cnt, total_fasted_7d, avg_fasted_7d, max_fasted_7d = ActionSendFastingLog.retrieve_fasting_log(tracker.events)
         if consecutive_cnt == 1:
             str_consecutive = f"{consecutive_cnt} Tag"
         else:
             str_consecutive = f"{consecutive_cnt} Tagen"
 
-        dispatcher.utter_message(text = f"Du hast seit {str_consecutive} täglich gefastet.\n \nHier ist deine Übersicht der letzten 7 Tage:\n  - du hast {total_fasted_7d:,.2f} Stunden gefastet\n  - durchschn. hast du {avg_fasted_7d:,.2f} Stunden gefastet\n  - dein längstes Fasten war {max_fasted_7d:,.2f} Stunden")
+        dispatcher.utter_message(text = f"Du fastest seit {str_consecutive} Tagen in Folge. Dein Rekord liegt bei {max_cnt}.\n \nHier ist deine Übersicht der letzten 7 Tage:\n  - du hast {total_fasted_7d:,.2f} Stunden gefastet\n  - durchschn. hast du {avg_fasted_7d:,.2f} Stunden gefastet\n  - dein längstes Fasten war {max_fasted_7d:,.2f} Stunden")
 
     @staticmethod
     def retrieve_fasting_log(events, days_to_subtract=7):
         '''
-            get summary stats for fasting_log (fasting_log window = 1 week)
+            get summary stats for fasting_log
         '''
         # consecutive days until today
         fasting_log = [{"value": event["value"], "date_end": datetime.datetime.fromtimestamp(event["timestamp"]).date(), "date_start": (datetime.datetime.fromtimestamp(event["timestamp"]) -  datetime.timedelta(hours=event["value"])).date()} for event in events if event["event"] == "slot" if event["name"] == "total_hours_fasted"]
         if len(fasting_log) > 0: # if no fast has been finished so far, there is no relevant event 
             consecutive_list = [(log["date_end"].toordinal(), log["date_start"].toordinal()) for log in fasting_log]
             consecutive_cnt = 0
+            max_cnt = 0
             for (first_event, second_event) in zip(consecutive_list, consecutive_list[1:]): # compare two adjacent fasting events: did one start at the end of the other? Important: reverse the list because the tracker shows the most recent value first
                 if max(first_event) == min(second_event):
                     consecutive_cnt += 1
+                    if consecutive_cnt > max_cnt:
+                        max_cnt = consecutive_cnt
                 else:
                     consecutive_cnt = 0
             if datetime.datetime.now().toordinal() - max(max(consecutive_list))>1: # if the user has not started a fast today or yesterday, set to 0
@@ -139,15 +142,14 @@ class ActionSendFastingLog(Action):
             # stats for relevant period
             start_of_period = datetime.datetime.now().date() -  datetime.timedelta(days=days_to_subtract)
             fasting_log = [event["value"] for event in fasting_log if event["date_start"] > start_of_period]
+            total_fasted_7d, avg_fasted_7d, max_fasted_7d = (0, 0, 0)
             if len(fasting_log) > 0: # if no fast has been finished within the relevant period, there is no relevant event 
                 total_fasted_7d = sum(fasting_log)
                 avg_fasted_7d = sum(fasting_log) / len(fasting_log)
                 max_fasted_7d = max(fasting_log)
-                return consecutive_cnt, total_fasted_7d, avg_fasted_7d, max_fasted_7d
-            else:
-                return consecutive_cnt, 0, 0, 0
+            return consecutive_cnt, max_cnt, total_fasted_7d, avg_fasted_7d, max_fasted_7d
         else:
-            return 0, 0, 0, 0
+            return 0, 0, 0, 0, 0
 
 #### EXTRACT DATA
 class ActionEntityExtract(Action):
