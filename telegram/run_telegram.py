@@ -5,33 +5,36 @@
 ## purpose: 
 # - maintain AYA alive on Telegram
 ## structure:
-# - there are 3 key blocks: extracting incoming (extract_main), get outgoing (call_webhook), send outgoing (sent to webhook - NOT in this file)
+# - there are 3 key blocks: extract incoming (extract_main), get outgoing (call_webhook), send outgoing (sent to webhook - NOT in this file)
 
 import time
 import logging
 import sys
 import os
 
-import telegram_bot
-import src.call_webhook
+from telegram_listener import Telegram_Listener
+from call_rasa import call_rasa
 
 def main(chat_id=None):
     # last_update_id is used to make sure that messages are only retrieved once
-    last_update_id = None
+    next_update_id = None
+    logging.info(f"starting telegram_bot")
 
     while True:
         try:
             ##### listen for new messages
-            updates = Telegram_Bot.get_updates(last_update_id)
-            ## main job
+            update, next_update_id = Telegram_Listener.get_update_and_next_update_id(next_update_id)
             
-            if len(updates["result"]) > 0:
-                last_update_id = Telegram_Bot.get_last_update_id(updates) + 1
+            if update:
                 # extract incoming message
-                chat_id, message = Telegram_Bot.extract_main(updates)
-                # get outgoing message
+                chat_id, message = Telegram_Listener.extract_main(update)
                 logging.info(f"user message: {message}")
-                webhook_response = src.call_webhook(chat_id, message)
+
+                if not all((chat_id, message)):
+                    # if a user provides input that is not expected (e.g. adding a user to a chat), ignore these inputs for now
+                    # better solution is to set a default "I don't know what this means" response and send it to Rasa
+                    continue
+                webhook_response = call_rasa(chat_id, message)
                 logging.info(f"webhook_response: {webhook_response}")
         except Exception as e:
             logging.exception(e)
@@ -41,5 +44,5 @@ def main(chat_id=None):
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO) # filename='aya.log'
-    Telegram_Bot = telegram_bot.Telegram_Bot()
+    Telegram_Listener = Telegram_Listener()
     main()
