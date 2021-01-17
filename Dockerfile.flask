@@ -10,10 +10,8 @@ COPY setup.py .
 RUN python setup.py develop
 
 # mount relevant directories
-COPY ./flask ./flask
-COPY ./telegram ./telegram
-COPY ./src ./src
+COPY ./flask .
 
 EXPOSE 5000
 
-CMD cd /app/flask && export FLASK_APP=index.py && export FLASK_ENV=development && flask run --host 0.0.0.0
+CMD export FLASK_APP=index.py && export FLASK_ENV=development && flask run --host 0.0.0.0

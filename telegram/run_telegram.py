@@ -18,7 +18,7 @@ from call_rasa import call_rasa
 def main(chat_id=None):
     # last_update_id is used to make sure that messages are only retrieved once
     next_update_id = None
-    logging.info(f"starting telegram_bot")
+    logging.info(f"starting Telegram_Listener")
 
     while True:
         try:
