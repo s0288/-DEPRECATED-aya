@@ -1,11 +1,11 @@
 # / index.py
+
 from flask import Flask, request, jsonify, render_template
-import requests
-import json
+import logging
 
-import telegram
+from telegram_sender import Telegram_Sender
+Telegram_Sender = Telegram_Sender()
 
-Telegram_Bot = telegram.Telegram_Bot()
 app = Flask(__name__)
 
 @app.route('/')
@@ -14,38 +14,13 @@ def index():
 
 @app.route('/bot', methods=['POST'])
 def webhook():
-    response = request.get_json(silent=True)
-    send_elements = get_send_elements(response)
-    # send outgoing message
-    Telegram_Bot.send_message(send_elements)
-
+    response = request.get_json()
+    # app.logger.info(f"response received: {response}")
+    chat_id, message_text, inline_keyboard = Telegram_Sender.get_chat_id_and_message_text_and_inline_keyboard(response)
+    Telegram_Sender.send_message_to_telegram(chat_id, message_text, inline_keyboard)
     return response
-
-
-def get_send_elements(response):
-    ## -----------
-    ## receive msg, e.g. {'recipient_id': 'test123', 'text': 'Hallo. Wie fühlst du dich?'} and send/save response
-    ## -----------
-    # message container for incoming and outgoing msgs
-    send_elements = {'created_at': None, 'received_at': None, 'message_id': None,
-                    'message': None, 'user_id': None, 'chat_id': None, 'chat_type': None, 'is_bot': None, 
-                    'bot_command': None, 'keyboard': None, 'img': None}
-    send_elements["chat_id"] = response["recipient_id"]
-    # if text provided, add respective message_element
-    if response.get("text"):
-        send_elements["message"] = response["text"]
-    # if image provided, add respective message_element
-    if response.get("image"):
-        send_elements["message"] = response["image"]
-    # if buttons provided, create inline keyboard
-    if response.get('buttons'):
-        # create correct format for inline_keyboard, e.g.: {"inline_keyboard":[[{"text": "Hello", "callback_url": "Hello", "url": "", "callback_data": "Hello"},{"text": "No", "callback_url": "Google", "url": "http://www.google.com/"}]]}
-        send_elements["keyboard"] = Telegram_Bot.create_inline_keyboard(response["buttons"])
-    return send_elements
-
-
-
 
 # run Flask app
 if __name__ == "__main__":
+    logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO)
     app.run()

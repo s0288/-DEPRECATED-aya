@@ -1,6 +1,6 @@
 """
 
-telgram_listener listens for incoming messages or requests to send triggers 
+Telegram_Listener listens for incoming messages or requests to send triggers 
 
 """
 
