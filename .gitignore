@@ -7,7 +7,6 @@ Read_me.rtf
 .vscode
 *.sql
 *.egg-info
-*.sh
 .env
 *.pem
 *.sh
