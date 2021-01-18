@@ -114,7 +114,7 @@ class ActionSendFastingLog(Action):
         if consecutive_cnt == 1:
             str_consecutive = f"{consecutive_cnt} Tag"
         else:
-            str_consecutive = f"{consecutive_cnt} Tagen"
+            str_consecutive = f"{consecutive_cnt:,} Tagen"
 
         dispatcher.utter_message(text = f"Du fastest seit {str_consecutive} in Folge. Dein Rekord liegt bei {max_cnt:,} Tagen.\n \nHier ist deine Übersicht der letzten 7 Tage:\n  - du hast {total_fasted_7d:,.2f} Stunden gefastet\n  - durchschn. hast du {avg_fasted_7d:,.2f} Stunden gefastet\n  - dein längstes Fasten war {max_fasted_7d:,.2f} Stunden")
 
