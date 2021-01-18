@@ -1,5 +1,5 @@
-# purpose
-- aya is a telegram chatbot that helps users implement fasting into their lifestyle
+# aya
+- a telegram chatbot that helps users implement fasting into their lifestyle
 
 # service structure
 - rasa: aya's core speaking capability
