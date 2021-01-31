@@ -10,3 +10,4 @@ Read_me.rtf
 .env
 *.pem
 *.sh
+logs/

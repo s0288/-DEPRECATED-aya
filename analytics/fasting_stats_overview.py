@@ -28,7 +28,6 @@ def call_db():
             select 
                 id, sender_id, to_timestamp(timestamp) as created_at, data::json
             from events 
-            where to_timestamp(timestamp) > current_date - interval '8 days'
             """, con)
     return data
 
