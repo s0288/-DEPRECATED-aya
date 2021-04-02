@@ -1,0 +1,5 @@
+rules:
+- rule: Utter default message when user message has low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_default
