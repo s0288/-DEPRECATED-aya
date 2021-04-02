@@ -47,6 +47,8 @@ slots:
     type: float
     influence_conversation: false
 responses:
+  utter_default:
+  - text: Entschuldige, das habe ich nicht verstanden. Kannst du das noch einmal auf andere Weise sagen? 
   utter_start:
   - text: Hey! Ich helfe dir zu fasten und erfasse deine Fastenzeiten. Wenn du bereit bist, schreibe mir einfach, dass du fasten möchtest.
   utter_goodbye:
