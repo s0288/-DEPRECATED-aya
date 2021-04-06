@@ -47,6 +47,11 @@ services:
         environment:
             - ROOT_USER=${ROOT_USER}
             - FLASK_URL=${FLASK_URL}
+            - AYA_TRACKER_DB_HOST=${AYA_TRACKER_DB_HOST}
+            - AYA_TRACKER_DB_DB=${AYA_TRACKER_DB_DB}
+            - AYA_TRACKER_DB_USER=${AYA_TRACKER_DB_USER}
+            - AYA_TRACKER_DB_PW=${AYA_TRACKER_DB_PW}
+            - AYA_TRACKER_DB_PORT=${AYA_TRACKER_DB_PORT}
         networks:
             - aya
 

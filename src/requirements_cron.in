@@ -1,3 +1,5 @@
 requests
 crython
 six
+pandas==1.2.3
+sqlalchemy

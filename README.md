@@ -4,11 +4,9 @@
 # service structure
 - rasa: aya's core speaking capability
 - actions: custom actions server for rasa
-- flask: 
-  - send msgs to user
-- telegram: 
-  - receive msgs from user or triggers
-- cron: set up triggers
+- flask: send msgs to user
+- telegram: receive msgs from user or triggers
+- cron: monitoring 
 
 # local set up
 - aya runs in a series of docker containers (see docker-compose.yml). For local setup, the following is recommended:
