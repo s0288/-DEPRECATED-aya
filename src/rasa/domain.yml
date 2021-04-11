@@ -19,6 +19,7 @@ intents:
 - fast_log
 - weight_add
 - weight_value
+- recipes_get
 entities:
 - is_fasting
 - start_fast
@@ -134,20 +135,8 @@ responses:
     text: Möchtest du dein Gewicht eintragen?
   utter_ask_weight_value:
   - text: Wie viel hast du gewogen?
-  utter_ask_talk:
-  - buttons:
-    - payload: ja
-      title: ja
-    - payload: nein
-      title: nein
-    text: Möchtest du beschreiben, was dich beschäftigt?
-  utter_ask_feelings:
-  - text: Was beschäftigt dich?
-  - text: Was geht dir durch den Kopf?
-  utter_ask_countermeasures:
-  - text: Wie möchtest du mit deiner Situation umgehen?
-  - text: Siehst du eine Möglichkeit, deine Situation zu verändern?
-  - text: Gibt es etwas, das du tun könntest, um dich wohler zu fühlen?
+  utter_send_recipes:
+  - text: "Hier sind ein paar Rezept-Ideen: https://s0288.github.io/strowan_recipes/alle-rezepte/"
 actions:
 - action_end_fast
 - action_fasting_since

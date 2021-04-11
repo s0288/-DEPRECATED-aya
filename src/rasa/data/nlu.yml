@@ -81,6 +81,8 @@ nlu:
     - perfect
     - happy
     - es geht mir gut
+    - gut, danke
+    - alles prima, danke
 - intent: mood_unhappy
   examples: |
     - sad
@@ -182,3 +184,11 @@ nlu:
     - [99](weight_value) kilo
     - [68](weight_value) kilos
     - ich wiege [74](weight_value) kilo
+- intent: recipes_get
+  examples: |
+    - rezepte
+    - rezept
+    - rezeptübersicht
+    - hast du Rezeptideen?
+    - Rezeptideen
+    - kennst du gute Rezepte?
