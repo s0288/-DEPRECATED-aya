@@ -141,3 +141,7 @@ stories:
   - intent: weight_value
   - action: action_entity_extract
   - action: utter_noted
+- story: recipes get
+  steps:
+  - intent: recipes_get
+  - action: utter_send_recipes
