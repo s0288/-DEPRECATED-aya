@@ -3,3 +3,4 @@ crython
 six
 pandas==1.2.3
 sqlalchemy
+psycopg2-binary

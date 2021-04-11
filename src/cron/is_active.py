@@ -6,6 +6,7 @@ Uptime_Bot triggers msgs to the Flask app to trigger Telegram msgs to the root u
 '''
 
 import os
+import logging
 import crython
 import requests
 import pandas as pd
@@ -16,21 +17,24 @@ def is_active(root_user, flask_url):
     '''
     When Uptime_Bot is initialised, trigger a msg.
     '''
+    logging.info(f"starting job: is_active")
     url = flask_url
 
-    engine = _create_engine()
-    interval = '8 days'
-    data = _get_new_users_in_interval(engine, interval)
-    txt = f"interval: last {interval}\n"
-    txt += f"- cnt users: {len(data)}\n"
-    txt += f"- new users: {len(data[data.new_user_in_interval])}\n"
-    txt += f"- currently fasting: {len(data[data.currently_fasting])}"
-
-    data = {"recipient_id":root_user,"text":txt}
-    requests.post(url, json=data)
+    try:
+        engine = _create_engine()
+        interval = '8 days'
+        data_users = _get_new_users_in_interval(engine, interval)
+        txt = f"interval: last {interval}\n"
+        txt += f"- cnt users: {len(data_users)}\n"
+        txt += f"- new users: {len(data_users[data_users.new_user_in_interval])}\n"
+        txt += f"- currently fasting: {len(data_users[data_users.currently_fasting])}"
+        data = {"recipient_id":root_user,"text":txt}
+        requests.post(url, json=data)
+    except Exception as e: 
+        logging.info(f"exception in job: {e}")
 
 def _create_engine():
-    url = f"postgres://{os.environ.get('AYA_TRACKER_DB_USER')}:"
+    url = f"postgresql://{os.environ.get('AYA_TRACKER_DB_USER')}:"
     url += f"{os.environ.get('AYA_TRACKER_DB_PW')}@{os.environ.get('AYA_TRACKER_DB_HOST')}:"
     url += f"{os.environ.get('AYA_TRACKER_DB_PORT')}/{os.environ.get('AYA_TRACKER_DB_DB')}"
     engine = create_engine(url)
@@ -60,5 +64,6 @@ def _get_new_users_in_interval(engine, interval='8 days'):
     return data
 
 if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO)
     crython.start()
     crython.join()  ## This will block

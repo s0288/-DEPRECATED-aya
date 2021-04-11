@@ -135,6 +135,7 @@ nlu:
     - habe ich es bald geschafft?
     - hab ichs bald hinter mir?
     - wie lange noch?
+    - wie lange schon?
 - intent: fast_end
   examples: |
     - stop
@@ -145,14 +146,10 @@ nlu:
     - aufhören
 - intent: fast_log
   examples: |
-    - wie viel habe ich gefastet?
     - schick mir meine übersicht
     - fastenübersicht
     - übersicht
-    - wie lange habe ich letzte Woche gefastet?
     - kannst du mir sagen, wie viel ich gefastet habe?
-    - ich möchte wissen, wie lange ich gefastet habe
-    - ich möchte wissen, wie viel ich gefastet habe
 - intent: weight_add
   examples: |
     - ich habe mich gewogen
