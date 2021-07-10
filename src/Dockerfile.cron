@@ -7,6 +7,6 @@ COPY requirements_cron.txt .
 RUN pip install -r requirements_cron.txt
 
 # mount relevant directories
-COPY ./cron .
+COPY ./cron/src .
 
-CMD python is_active.py
+CMD python cron_jobs.py
