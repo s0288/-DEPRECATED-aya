@@ -17,12 +17,12 @@ ROOT_USER = os.environ.get("ROOT_USER")
 FLASK_URL = os.environ.get("FLASK_URL")
 ENGINE = postgres_engine()
 
-@crython.job(expr='@daily', root_user=ROOT_USER, flask_url=FLASK_URL, engine=ENGINE)
+@crython.job(expr='@daily', root_user=ROOT_USER, flask_url=FLASK_URL, engine=ENGINE, ctx='multiprocess')
 def cron_is_active(root_user, flask_url, engine):
     """ cronjob wrapper for is_active """
     is_active(root_user, flask_url, engine)
 
-@crython.job(expr='@weekly', flask_url=FLASK_URL, engine=ENGINE)
+@crython.job(expr='@weekly', flask_url=FLASK_URL, engine=ENGINE, ctx='multiprocess')
 def cron_fasting_report(flask_url, engine, last_n_days=7):
     """ cronjob wrapper for fasting report """
     fasting_report(flask_url, engine, last_n_days)
