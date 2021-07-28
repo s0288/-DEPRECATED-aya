@@ -12,14 +12,14 @@ intents:
 - mood_great
 - mood_unhappy
 - no_problem
-- fast_start
+- fasten
 - fast_length_so_far
 - fast_end
 - fast_reminder
-- fast_log
+- uebersicht
 - weight_add
 - weight_value
-- recipes_get
+- rezepte
 entities:
 - is_fasting
 - start_fast
