@@ -34,9 +34,9 @@ stories:
   steps:
   - intent: goodbye
   - action: utter_goodbye
-- story: fast start yes
+- story: fasten start yes
   steps:
-  - intent: fast_start
+  - intent: fasten
   - action: action_fasting_since
   - slot_was_set:
     - is_fasting: 0
@@ -46,18 +46,18 @@ stories:
   - action: action_start_fast
   - slot_was_set:
     - is_fasting: 1
-- story: fast start no
+- story: fasten start no
   steps:
-  - intent: fast_start
+  - intent: fasten
   - action: action_fasting_since
   - slot_was_set:
     - is_fasting: 0
   - action: utter_ask_fast
   - intent: deny
   - action: utter_ok
-- story: fast start while fasting
+- story: fasten start while fasting
   steps:
-  - intent: fast_start
+  - intent: fasten
   - action: action_fasting_since
   - slot_was_set:
     - is_fasting: 1
@@ -117,9 +117,9 @@ stories:
   - action: action_fasting_since
   - action: utter_reminder_fast
   - action: action_set_reminder_fast
-- story: fast log
+- story: uebersicht
   steps:
-  - intent: fast_log
+  - intent: uebersicht
   - action: action_send_fasting_log
 - story: weight add yes
   steps:
@@ -141,7 +141,7 @@ stories:
   - intent: weight_value
   - action: action_entity_extract
   - action: utter_noted
-- story: recipes get
+- story: rezepte
   steps:
-  - intent: recipes_get
+  - intent: rezepte
   - action: utter_send_recipes

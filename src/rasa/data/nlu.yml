@@ -113,7 +113,7 @@ nlu:
     - danke sehr
     - danke dir
     - dankeschön
-- intent: fast_start
+- intent: fasten
   examples: |
     - ich möchte fasten
     - fasten start
@@ -121,11 +121,11 @@ nlu:
     - fastenstart
     - fasten starten
     - fasten
-    - start
     - ich will fasten
     - fastenbeginn
     - beginn fasten
     - start fasten
+    - /fasten
 - intent: fast_length_so_far
   examples: |
     - wie lange faste ich schon?
@@ -146,12 +146,13 @@ nlu:
     - ende
     - fasten beenden
     - aufhören
-- intent: fast_log
+- intent: uebersicht
   examples: |
     - schick mir meine übersicht
     - fastenübersicht
     - übersicht
     - kannst du mir sagen, wie viel ich gefastet habe?
+    - /uebersicht
 - intent: weight_add
   examples: |
     - ich habe mich gewogen
@@ -184,7 +185,7 @@ nlu:
     - [99](weight_value) kilo
     - [68](weight_value) kilos
     - ich wiege [74](weight_value) kilo
-- intent: recipes_get
+- intent: rezepte
   examples: |
     - rezepte
     - rezept
@@ -192,3 +193,5 @@ nlu:
     - hast du Rezeptideen?
     - Rezeptideen
     - kennst du gute Rezepte?
+    - /rezepte
+    - /rezept
