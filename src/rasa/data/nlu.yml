@@ -83,6 +83,9 @@ nlu:
     - es geht mir gut
     - gut, danke
     - alles prima, danke
+    - sehr schön
+    - darüber freue ich mich
+    - ich freue mich sehr darüber
 - intent: mood_unhappy
   examples: |
     - sad
@@ -126,8 +129,14 @@ nlu:
     - beginn fasten
     - start fasten
     - /fasten
-- intent: fast_length_so_far
+- intent: fast_end
   examples: |
+    - stop
+    - stopp
+    - fastenende
+    - ende
+    - fasten beenden
+    - aufhören
     - wie lange faste ich schon?
     - wann habe ich [16](fast_length) Stunden geschafft?
     - habe ich bald [20](fast_length) Stunden?
@@ -138,14 +147,6 @@ nlu:
     - hab ichs bald hinter mir?
     - wie lange noch?
     - wie lange schon?
-- intent: fast_end
-  examples: |
-    - stop
-    - stopp
-    - fastenende
-    - ende
-    - fasten beenden
-    - aufhören
 - intent: uebersicht
   examples: |
     - schick mir meine übersicht

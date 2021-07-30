@@ -13,7 +13,6 @@ intents:
 - mood_unhappy
 - no_problem
 - fasten
-- fast_length_so_far
 - fast_end
 - fast_reminder
 - uebersicht
@@ -26,7 +25,6 @@ entities:
 - hours_fasted
 - mins_fasted
 - weight_value
-- fast_length
 slots:
   is_fasting:
     type: categorical
@@ -51,7 +49,7 @@ responses:
   utter_default:
   - text: Entschuldige, das habe ich nicht verstanden. Kannst du das noch einmal auf andere Weise sagen? 
   utter_start:
-  - text: Hey! Ich helfe dir zu fasten und erfasse deine Fastenzeiten. Wenn du bereit bist, schreibe mir einfach, dass du fasten möchtest.
+  - text: Hey! Ich erfasse deine Fastenzeiten und höre dir zu. Wenn du fasten möchtest, schreibe mir einfach, bspw. mit 'ich möchte fasten'.
   utter_goodbye:
   - text: Ciao
   - text: Bis bald
@@ -64,10 +62,11 @@ responses:
   - text: Hallo. Wie geht es dir heute?
   - text: Guten Tag. Wie fühlst du dich?
   utter_happy:
-  - text: Super, weiter so!
+  - text: Schön zu hören.
   - text: Das freut mich.
   - text: Das klingt schön.
   - text: Wunderbar
+  - text: Das ist schön.
   utter_express_empathy:
   - text: Das ist schade.
   - text: Es scheint dir nicht gut zu gehen.
@@ -113,8 +112,6 @@ responses:
     text: Möchtest du fasten?
   utter_end_fast:
   - text: Ich habe deine Fastenuhr gestoppt. Du hast {hours_fasted} und {mins_fasted} gefastet. Glückwunsch :)
-  utter_info_fast:
-  - text: Du fastest seit {hours_fasted} und {mins_fasted}.
   utter_info_not_fasting_ask_fast:
   - buttons:
     - payload: ja

@@ -61,17 +61,10 @@ stories:
   - action: action_fasting_since
   - slot_was_set:
     - is_fasting: 1
-  - action: utter_info_fast
-- story: fast length while fasting
+  - action: utter_ask_end_fast
+- story: fast end without fasting yes
   steps:
-  - intent: fast_length_so_far
-  - action: action_fasting_since
-  - slot_was_set:
-    - is_fasting: 1
-  - action: utter_info_fast
-- story: fast length without fasting yes
-  steps:
-  - intent: fast_length_so_far
+  - intent: fast_end
   - action: action_fasting_since
   - slot_was_set:
     - is_fasting: 0
@@ -81,9 +74,9 @@ stories:
   - slot_was_set:
     - is_fasting: 1
   - action: utter_start_fast
-- story: fast length without fasting no
+- story: fast end without fasting no
   steps:
-  - intent: fast_length_so_far
+  - intent: fast_end
   - action: action_fasting_since
   - slot_was_set:
     - is_fasting: 0

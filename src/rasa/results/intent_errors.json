@@ -3,8 +3,8 @@
     "text": "/start",
     "intent": "start",
     "intent_prediction": {
-      "name": "fast_start",
-      "confidence": 0.5538637042045593
+      "name": "uebersicht",
+      "confidence": 0.3590986430644989
     }
   }
 ]
