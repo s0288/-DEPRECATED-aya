@@ -1,0 +1,145 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 0
+  carry_over_slots_to_new_session: true
+intents:
+- start
+- affirm
+- greet
+- how_are_you
+- deny
+- goodbye
+- mood_great
+- mood_unhappy
+- no_problem
+- fasten
+- fast_end
+- fast_reminder
+- uebersicht
+- weight_add
+- weight_value
+- rezepte
+entities:
+- is_fasting
+- start_fast
+- hours_fasted
+- mins_fasted
+- weight_value
+slots:
+  is_fasting:
+    type: categorical
+    initial_value: 0
+    influence_conversation: true
+    values:
+    - '0'
+    - '1'
+  start_fast:
+    type: any
+    initial_value: None
+  hours_fasted:
+    type: any
+  mins_fasted:
+    type: any
+  weight_value:
+    type: any
+  total_hours_fasted:
+    type: float
+    influence_conversation: false
+responses:
+  utter_default:
+  - text: Entschuldige, das habe ich nicht verstanden. Kannst du das noch einmal auf andere Weise sagen? 
+  utter_start:
+  - text: Hey! Ich erfasse deine Fastenzeiten und höre dir zu. Wenn du fasten möchtest, schreibe mir einfach, bspw. mit 'ich möchte fasten'.
+  utter_goodbye:
+  - text: Ciao
+  - text: Bis bald
+  - text: Mach's gut
+  utter_greet:
+  - text: Hey! Wie geht es dir? :)
+  - text: Hallo. Wie fühlst du dich?
+  - text: Hey, wie geht es dir?
+  - text: Hi. Wie fühlst du dich gerade?
+  - text: Hallo. Wie geht es dir heute?
+  - text: Guten Tag. Wie fühlst du dich?
+  utter_happy:
+  - text: Schön zu hören.
+  - text: Das freut mich.
+  - text: Das klingt schön.
+  - text: Wunderbar
+  - text: Das ist schön.
+  utter_express_empathy:
+  - text: Das ist schade.
+  - text: Es scheint dir nicht gut zu gehen.
+  - text: Das tut mir leid zu hören.
+  - text: Du wirkst nachdenklich.
+  utter_I_am_fine:
+  - text: Mir geht es gut, danke.
+  - text: Ein bisschen langweilig ...
+  - text: Ich habe viel gelesen heute. Das hat mir gefallen.
+  - text: Ich fühle mich etwas nachdenklich heute.
+  - text: Ich glaube mir geht es so wie dir heute.
+  utter_no_problem:
+  - text: kein Problem
+  - text: gern geschehen
+  - text: gerne
+  utter_ok:
+  - text: ok
+  - text: alles klar
+  - text: in Ordnung
+  - text: verstanden
+  utter_noted:
+  - text: ok, ist notiert
+  - text: habe ich notiert
+  - text: alles klar, ich merke es mir
+  - text: ist eingetragen
+  utter_thank_you:
+  - text: Danke, dass du mir das erzählt hast.
+  - text: Vielen Dank für das Teilen deiner Gedanken.
+  - text: Danke, dass du das mit mir geteilt hast.
+  utter_ask_end_fast:
+  - buttons:
+    - payload: ja
+      title: ja
+    - payload: nein
+      title: nein
+    text: Du fastest seit {hours_fasted} und {mins_fasted}. Möchtest du das Fasten jetzt beenden?
+  utter_ask_fast:
+  - buttons:
+    - payload: ja
+      title: ja
+    - payload: nein
+      title: nein
+    text: Möchtest du fasten?
+  utter_end_fast:
+  - text: Ich habe deine Fastenuhr gestoppt. Du hast {hours_fasted} und {mins_fasted} gefastet. Glückwunsch :)
+  utter_info_not_fasting_ask_fast:
+  - buttons:
+    - payload: ja
+      title: ja
+    - payload: nein
+      title: nein
+    text: Du fastest aktuell nicht. Möchtest du starten?
+  utter_start_fast:
+  - text: Ich habe deine Fastenuhr gestartet. Frohes Fasten!
+  utter_reminder_fast:
+  - text: Du fastest seit {hours_fasted}! :)
+  utter_ask_weight:
+  - buttons:
+    - payload: ja
+      title: ja
+    - payload: nein
+      title: nein
+    text: Möchtest du dein Gewicht eintragen?
+  utter_ask_weight_value:
+  - text: Wie viel hast du gewogen?
+  utter_send_recipes:
+  - text: "Hier sind ein paar Rezept-Ideen: https://s0288.github.io/strowan_recipes/alle-rezepte/"
+actions:
+- action_end_fast
+- action_fasting_since
+- action_hello_world
+- action_start_fast
+- action_set_reminder_fast
+- action_forget_reminder_fast
+- action_send_overview
+- action_entity_extract

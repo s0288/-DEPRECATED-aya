@@ -1,0 +1,42 @@
+[
+  {
+    "text": "wann habe ich 16 Stunden geschafft?",
+    "entities": [
+      {
+        "start": 14,
+        "end": 16,
+        "value": "16",
+        "entity": "fast_length"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "weight_value",
+        "start": 14,
+        "end": 16,
+        "value": "16",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "habe ich bald 20 Stunden?",
+    "entities": [
+      {
+        "start": 14,
+        "end": 16,
+        "value": "20",
+        "entity": "fast_length"
+      }
+    ],
+    "predicted_entities": [
+      {
+        "entity": "weight_value",
+        "start": 14,
+        "end": 16,
+        "value": "20",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  }
+]

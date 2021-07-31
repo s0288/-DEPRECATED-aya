@@ -1,0 +1,12 @@
+FROM rasa/rasa-sdk:2.2.0
+
+USER root
+
+# install dependencies
+COPY requirements_rasa_sdk.txt .
+RUN pip install --no-cache-dir -r requirements_rasa_sdk.txt
+# install module
+COPY setup.py .
+RUN python setup.py develop
+
+USER 1001
