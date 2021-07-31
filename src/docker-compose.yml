@@ -29,19 +29,25 @@ services:
         ports:
             - "5005:5005"
         volumes:
-            - ./rasa:/app
+            - ./rasa/src:/app
         command: 
             - run
         depends_on:
             - actions
+    # actions:
+    #     image: s0288/rasa_sdk
+    #     networks:
+    #         - aya
+    #     ports:
+    #         - "5055:5055"
     actions:
-        image: rasa/rasa-sdk:2.2.0
+        image: s0288/rasa_sdk # rasa/rasa-sdk:2.2.0
         networks:
             - aya
         ports:
             - "5055:5055"
         volumes:
-            - ./rasa:/app/actions
+            - ./rasa/src:/app/actions
     cron:
         image: s0288/cron
         environment:

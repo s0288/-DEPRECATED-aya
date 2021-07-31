@@ -1,6 +1,0 @@
-version: "2.0"
-stories:
-- story: recipes 2 // command 2 (/tmp/tmpdlf0dq9j/e5695deb516a456fbcd075c646a6bd02_conversation_tests.md)
-  steps:
-  - intent: rezepte  # predicted: rezept: /rezept
-  - action: utter_send_recipes
