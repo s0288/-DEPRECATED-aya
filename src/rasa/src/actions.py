@@ -114,21 +114,46 @@ class ActionSendOverview(Action):
         
         DAYS_IN_PERIOD = 30
         events_in_period = ActionSendOverview._get_events_for_period(tracker.events, days_in_period=DAYS_IN_PERIOD)
-        avg_hours_fasted = ActionSendOverview._calculate_median_hours_fasted(events_in_period)
-        days_w_24h_or_more = ActionSendOverview._calculate_days_w_24h_or_more(events_in_period)
-        total_days_fasted = ActionSendOverview._calculate_total_days_fasted(events_in_period)
+        avg_hours_fasted, days_w_24h_or_more, total_days_fasted = ActionSendOverview._return_overview_stats(events_in_period)
+        
+        events_in_period_offset = ActionSendOverview._get_events_for_period(tracker.events, days_in_period=DAYS_IN_PERIOD, days_to_offset=DAYS_IN_PERIOD)
+        avg_hours_fasted_offset, days_w_24h_or_more_offset, total_days_fasted_offset = ActionSendOverview._return_overview_stats(events_in_period_offset)
+        diff_avg_hours_fasted = avg_hours_fasted - avg_hours_fasted_offset
+        diff_days_w_24h_or_more = days_w_24h_or_more - days_w_24h_or_more_offset
+        diff_total_days_fasted = total_days_fasted - total_days_fasted_offset
 
-        txt_msg = f"Hier ist deine Übersicht der letzten 30 Tage:\n"
-        txt_msg += f" - du hast durchschn. {avg_hours_fasted:,.2f} Stunden gefastet\n"
-        txt_msg += f" - du hast an {days_w_24h_or_more} {'Tag' if days_w_24h_or_more==1 else 'Tagen'} mind. 24 Stunden gefastet\n"
-        txt_msg += f" - du hast an {total_days_fasted} {'Tag' if days_w_24h_or_more==1 else 'Tagen'} gefastet ({total_days_fasted/DAYS_IN_PERIOD:.2%} der Tage im Zeitraum)\n\n"
-        # txt_msg += f"Das sind durchschn. {diff_avg_hours_fasted} Stunden mehr pro Fasten und {diff_total_days_fasted} Tage mehr/weniger als in den 30 Tagen davor."
+        txt_msg = f"Hier ist deine Übersicht der letzten {DAYS_IN_PERIOD} Tage:\n"
+        txt_msg += f" - du hast an {total_days_fasted} {'Tag' if total_days_fasted==1 else 'Tagen'} gefastet "
+        txt_msg += f"({'+' if diff_total_days_fasted>=0 else ''}{diff_total_days_fasted} {'Tag' if diff_total_days_fasted==1 else 'Tage'})\n"
+        txt_msg += f" - du hast durchschn. {avg_hours_fasted:,.2f} Stunden gefastet " 
+        txt_msg += f"({'+' if diff_avg_hours_fasted>=0  else ''}{diff_avg_hours_fasted:,.2f} Stunden)\n"
+        txt_msg += f" - du hast an {days_w_24h_or_more} {'Tag' if days_w_24h_or_more==1 else 'Tagen'} mind. 24 Stunden gefastet "
+        txt_msg += f"({'+' if diff_days_w_24h_or_more>=0  else ''}{diff_days_w_24h_or_more} {'Tag' if abs(diff_days_w_24h_or_more)==1 else 'Tage'})\n\n"
+        txt_msg += f"Die Zahlen in Klammern sind die Veränderung gegenüber den {DAYS_IN_PERIOD} Tagen davor."
+
         dispatcher.utter_message(text = txt_msg)
         
     @staticmethod
-    def _get_events_for_period(events, days_in_period):
+    def _get_events_for_period(events, days_in_period, days_to_offset=0):
+        """
+        For a given list of events, return only those events that are within a given period.
+
+        :param events:          list of dictionaries    (rasa event list of dictionaries)
+        :param days_in_period:  integer                 (days in the past to consider for event window)
+        :param days_to_offset:  integer                 (number of days to offset event window into the past)
+
+        :return:                list of dictionaries    (rasa events within requested period)
+        """
         return [row for row in events \
-            if datetime.fromtimestamp(row['timestamp']) > (datetime.now() - timedelta(days=days_in_period))]
+            if datetime.fromtimestamp(row['timestamp']) > (datetime.now() - timedelta(days=days_in_period+days_to_offset)) \
+            if datetime.fromtimestamp(row['timestamp']) < (datetime.now() - timedelta(days=days_to_offset))]
+
+    @staticmethod
+    def _return_overview_stats(events):
+        avg_hours_fasted = ActionSendOverview._calculate_median_hours_fasted(events)
+        days_w_24h_or_more = ActionSendOverview._calculate_days_w_24h_or_more(events)
+        total_days_fasted = ActionSendOverview._calculate_total_days_fasted(events)
+        return avg_hours_fasted, days_w_24h_or_more, total_days_fasted
 
     @staticmethod
     def _calculate_median_hours_fasted(events):

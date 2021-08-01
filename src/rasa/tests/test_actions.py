@@ -45,10 +45,10 @@ EVENTS_WO_FASTING_HISTORY = [
 
 
 @pytest.mark.parametrize(
-    "events, days_in_period, expected", [
+    "events, days_in_period, days_to_offset, expected", [
         (
             EVENTS_W_FASTING_HISTORY, 
-            2,
+            2, 0,
             [
                 {"event": "slot", "timestamp": datetime.timestamp(datetime(datetime.now().year, 
                     datetime.now().month, datetime.now().day, 11, 0) - timedelta(days=1)), 
@@ -69,7 +69,7 @@ EVENTS_WO_FASTING_HISTORY = [
             ]
         ), (
             EVENTS_WO_FASTING_HISTORY, 
-            2,
+            2, 0,
             [
                 {'event': 'user', 'timestamp': datetime.timestamp(datetime(datetime.now().year, 
                     datetime.now().month, datetime.now().day, 10, 0) - timedelta(days=0)), 'text': 'hi', 
@@ -82,15 +82,24 @@ EVENTS_WO_FASTING_HISTORY = [
                             'response': {'id': None, 'response_templates': None, 'confidence': 0.0, 'intent_response_key': None, 'template_name': 'utter_None'}, 
                             'ranking': []}}}, 'input_channel': 'callback', 'message_id': 'cbe7ea58a4fb4f2cb1f04fc591104e40', 'metadata': {}}
             ]
+        ), (
+            EVENTS_W_FASTING_HISTORY, 
+            2, 2,
+            [
+                {"event": "slot", "timestamp": datetime.timestamp(datetime(datetime.now().year, 
+                    datetime.now().month, datetime.now().day, 11, 0) - timedelta(days=3)), 
+                    "name": "total_hours_fasted", "value": 22.616666666666667}
+            ]
         )
     ],
         ids=[
             "w_fasting_history_and_2d_in_period",
-            "wo_fasting_history_and_2d_in_period"
+            "wo_fasting_history_and_2d_in_period",
+            "w_fasting_history_and_2d_in_period_and_2d_offset"
             ]
 )
-def test_action_send_overview__get_events_for_period(events, days_in_period, expected):
-    assert ActionSendOverview._get_events_for_period(events, days_in_period) == expected
+def test_action_send_overview__get_events_for_period(events, days_in_period, days_to_offset, expected):
+    assert ActionSendOverview._get_events_for_period(events, days_in_period, days_to_offset) == expected
 
 
 @pytest.mark.parametrize(
