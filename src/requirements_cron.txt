@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements_cron.in
 #
-certifi==2020.12.5
+certifi==2022.12.7
     # via requests
 chardet==4.0.0
     # via requests
@@ -14,8 +14,6 @@ greenlet==1.0.0
     # via sqlalchemy
 idna==2.10
     # via requests
-importlib-metadata==3.10.0
-    # via sqlalchemy
 numpy==1.20.2
     # via pandas
 pandas==1.2.3
@@ -34,9 +32,5 @@ six==1.15.0
     #   python-dateutil
 sqlalchemy==1.4.6
     # via -r requirements_cron.in
-typing-extensions==3.7.4.3
-    # via importlib-metadata
 urllib3==1.26.4
     # via requests
-zipp==3.4.1
-    # via importlib-metadata
